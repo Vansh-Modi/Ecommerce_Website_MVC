@@ -1,0 +1,53 @@
+﻿@{
+    ViewBag.Title = "Login & Recovery | Show's Garage";
+}
+@section styles {
+    <link rel="stylesheet" href="~/Assets/css/login.css" />
+}
+
+<div class="auth-wrapper">
+    <div class="auth-card">
+        @if (TempData["LoginSuccess"] != null)
+        {
+            <div class="auth-success-msg" style="color:#28a745;text-align:center;margin-bottom:12px;">@TempData["LoginSuccess"]</div>
+        }
+
+        <div class="auth-header">
+            <h2>Welcome Back</h2>
+            <p>Login to your garage account</p>
+        </div>
+
+        @using (Html.BeginForm("Login", "Account", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            if (ViewBag.ReturnUrl != null && !string.IsNullOrEmpty(ViewBag.ReturnUrl.ToString()))
+            {
+                <input type="hidden" name="returnUrl" value="@ViewBag.ReturnUrl" />
+            }
+            <div class="auth-form">
+                <div class="input-group">
+                    <label>Email Address</label>
+                    <input type="email" name="email" class="auth-input" placeholder="Enter your email" required />
+                </div>
+                <div class="input-group">
+                    <label>Password</label>
+                    <input type="password" name="password" class="auth-input" placeholder="â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢" required />
+                </div>
+                <button type="submit" class="auth-btn">LOGIN</button>
+
+                @if (ViewBag.Error != null && !string.IsNullOrEmpty(ViewBag.Error.ToString()))
+                {
+                    <div style="color:#e50914;font-size:13px;margin-top:10px;">@ViewBag.Error</div>
+                }
+
+                <div class="auth-footer">
+                    <p style="margin-bottom:8px;">
+                        <a href="@Url.Action("ForgotPassword", "Account")" style="color:#bbb;font-size:13px;">Forgot Password?</a>
+                    </p>
+                    <p>New to the garage? <a href="@Url.Action("Register", "Account")">Create Account</a></p>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+

@@ -1,0 +1,622 @@
+﻿/* ==========================================================================
+   Show's Garage - Administrative Orders Dashboard Layout Style Sheet
+   ========================================================================== */
+
+.admin-orders-vertical-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    width: 100%;
+}
+
+.admin-order-master-card {
+    background-color: #141414;
+    border: 1px solid #222222;
+    border-radius: 8px;
+    overflow: hidden;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+/* Header Meta Bar Layout */
+.admin-order-card-header {
+    background-color: #1a1a1a;
+    border-bottom: 1px solid #222222;
+    padding: 16px 20px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.header-meta-group {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+@media (min-width: 768px) {
+    .id-right-align {
+        margin-left: auto;
+    }
+}
+
+.meta-label {
+    color: #555555;
+    font-size: 11px;
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+.meta-value {
+    color: #cccccc;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+    .meta-value.text-green {
+        color: #2ebd59;
+        font-weight: 700;
+    }
+
+.id-code-highlight {
+    font-family: monospace;
+    font-size: 15px;
+    color: #0076df;
+    font-weight: 700;
+}
+
+/* Status Badges */
+.admin-status-badge {
+    display: inline-block;
+    padding: 5px 12px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.adm-badge-yellow {
+    background-color: rgba(255, 193, 7, 0.08);
+    border: 1px solid #ffc107;
+    color: #ffc107;
+}
+
+.adm-badge-blue {
+    background-color: rgba(0, 118, 223, 0.08);
+    border: 1px solid #0076df;
+    color: #0076df;
+}
+
+.adm-badge-green {
+    background-color: rgba(46, 189, 89, 0.08);
+    border: 1px solid #2ebd59;
+    color: #2ebd59;
+}
+
+.adm-badge-gray {
+    background-color: #1c1c1c;
+    border: 1px solid #333;
+    color: #888;
+}
+
+/* Main Card Content Layouts */
+.admin-order-card-body {
+    padding: 20px;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.admin-shipping-logistics-summary {
+    font-size: 13px;
+    color: #aaaaaa;
+    background-color: #0d0d0d;
+    padding: 12px 16px;
+    border-radius: 5px;
+    border: 1px solid #1c1c1c;
+    line-height: 1.5;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+    word-break: break-word;
+}
+
+    .admin-shipping-logistics-summary strong {
+        color: #666666;
+        text-transform: uppercase;
+        font-size: 11px;
+        letter-spacing: 0.5px;
+    }
+
+.payment-meta-footer-row {
+    margin-top: 6px;
+    font-size: 11px;
+    color: #aaa;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.monospace-white {
+    font-family: monospace;
+    color: #fff;
+}
+
+/* Custom Interactive Sub-Navigation Filtering Strip Bar */
+.admin-filter-strip {
+    background-color: #141414;
+    border: 1px solid #222222;
+    padding: 15px 20px;
+    border-radius: 6px;
+    margin-bottom: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 15px;
+    box-sizing: border-box;
+}
+
+.filter-controls-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+@media (min-width: 768px) {
+    .filter-controls-group {
+        width: auto;
+    }
+}
+
+.filter-strip-label {
+    font-size: 13px;
+    color: #888;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.admin-filter-dropdown {
+    background-color: #1c1c1c;
+    border: 1px solid #2d2d2d;
+    border-radius: 4px;
+    color: #ffffff;
+    padding: 8px 12px;
+    font-size: 13px;
+    outline: none;
+    cursor: pointer;
+    box-sizing: border-box;
+}
+
+.filter-strip-hint {
+    font-size: 12px;
+    color: #555;
+}
+
+/* Inline Payment Modification Interactive Panel Box */
+.payment-inline-edit-box {
+    background-color: #161616;
+    border: 1px dashed #333333;
+    border-radius: 4px;
+    padding: 14px;
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 15px;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.edit-fields-row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+    width: 100%;
+}
+
+@media (min-width: 576px) {
+    .edit-fields-row {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 992px) {
+    .edit-fields-row {
+        grid-template-columns: repeat(5, 1fr);
+    }
+}
+
+.inline-input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+    .inline-input-group label {
+        font-size: 10px;
+        color: #666666;
+        text-transform: uppercase;
+        font-weight: 700;
+        letter-spacing: 0.5px;
+    }
+
+.inline-text-box {
+    background-color: #0d0d0d;
+    border: 1px solid #2d2d2d;
+    color: #ffffff;
+    padding: 8px 10px;
+    font-size: 13px;
+    border-radius: 4px;
+    width: 100%;
+    box-sizing: border-box;
+    outline: none;
+}
+
+    .inline-text-box:focus {
+        border-color: #0076df;
+    }
+
+.btn-inline-save {
+    background-color: #0076df;
+    color: #ffffff;
+    border: none;
+    padding: 10px 18px;
+    font-size: 12px;
+    font-weight: 700;
+    border-radius: 4px;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: background-color 0.15s ease;
+    width: 100%;
+}
+
+@media (min-width: 768px) {
+    .btn-inline-save {
+        width: auto;
+        align-self: flex-end;
+    }
+}
+
+.btn-inline-save:hover {
+    background-color: #0086ff;
+}
+
+.btn-toggle-edit {
+    font-size: 12px;
+    color: #0076df;
+    text-decoration: none;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+    .btn-toggle-edit:hover {
+        text-decoration: underline;
+        color: #0096ff;
+    }
+
+/* Purchased Item Manifest Line Form lists mappings */
+.admin-purchased-items-list {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 5px;
+    width: 100%;
+}
+
+.items-list-section-title {
+    font-size: 12px;
+    text-transform: uppercase;
+    color: #444444;
+    letter-spacing: 0.5px;
+    margin: 20px 0 10px 0;
+    font-weight: 700;
+}
+
+.admin-item-manifest-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px dashed #1c1c1c;
+    gap: 15px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+    .admin-item-manifest-row:last-child {
+        border-bottom: none;
+    }
+
+.manifest-item-details {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    flex: 1;
+}
+
+.manifest-item-title {
+    font-size: 14px;
+    color: #ffffff;
+    font-weight: 500;
+    word-break: break-word;
+}
+
+.manifest-item-specs {
+    font-size: 12px;
+    color: #666666;
+}
+
+.manifest-item-pricing {
+    display: flex;
+    align-items: flex-end;
+    flex-direction: column;
+    gap: 4px;
+    text-align: right;
+}
+
+@media (min-width: 576px) {
+    .manifest-item-pricing {
+        flex-direction: row;
+        align-items: center;
+        gap: 30px;
+    }
+}
+
+.manifest-item-qty {
+    color: #888888;
+    font-size: 13px;
+    white-space: nowrap;
+}
+
+.manifest-item-price {
+    color: #eeeeee;
+    font-family: monospace;
+    font-size: 14px;
+    font-weight: 600;
+    min-width: auto;
+    white-space: nowrap;
+}
+
+@media (min-width: 576px) {
+    .manifest-item-price {
+        min-width: 90px;
+    }
+}
+
+/* Manual Receipt Verification Workspace Panels Container */
+.admin-receipt-verification-panel {
+    background-color: #1a1a1a;
+    border: 1px solid #262626;
+    border-radius: 6px;
+    padding: 15px;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 20px;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+@media (min-width: 992px) {
+    .admin-receipt-verification-panel {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+    }
+}
+
+.verification-details-side {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    width: 100%;
+}
+
+@media (min-width: 576px) {
+    .verification-details-side {
+        align-items: center;
+        gap: 20px;
+    }
+}
+
+.admin-receipt-thumbnail-preview {
+    max-width: 65px;
+    max-height: 85px;
+    width: auto;
+    height: auto;
+    display: block;
+    border: 2px solid #333333;
+    border-radius: 4px;
+    background-color: #0d0d0d;
+    cursor: pointer;
+    transition: border-color 0.15s ease;
+    flex-shrink: 0;
+}
+
+    .admin-receipt-thumbnail-preview:hover {
+        border-color: #0076df;
+    }
+
+.reference-string-group {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    flex: 1;
+}
+
+.reference-string-label {
+    color: #777777;
+    font-size: 11px;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.reference-string-value {
+    color: #ffffff;
+    font-family: monospace;
+    font-size: 16px;
+    letter-spacing: 0.5px;
+    word-break: break-all;
+}
+
+.verification-instructions-hint {
+    margin: 2px 0 0 0;
+    font-size: 12px;
+    color: #555555;
+    line-height: 1.4;
+}
+
+/* Management Terminal Trigger Buttons Execution Panels */
+.verification-actions-side {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+}
+
+@media (min-width: 576px) {
+    .verification-actions-side {
+        flex-direction: row;
+    }
+}
+
+@media (min-width: 992px) {
+    .verification-actions-side {
+        width: auto;
+    }
+}
+
+.admin-btn-action {
+    display: block;
+    padding: 12px 18px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: filter 0.15s ease, transform 0.1s ease;
+    text-align: center;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+@media (min-width: 576px) {
+    .admin-btn-action {
+        flex: 1;
+    }
+}
+
+@media (min-width: 992px) {
+    .admin-btn-action {
+        width: auto;
+        flex: none;
+    }
+}
+
+.admin-btn-action:hover {
+    filter: brightness(1.1);
+}
+
+.admin-btn-action:active {
+    transform: scale(0.98);
+}
+
+.btn-action-approve {
+    background-color: #2ebd59;
+    color: #ffffff;
+}
+
+.btn-action-reject {
+    background-color: #ff3333;
+    color: #ffffff;
+}
+
+/* Selection Arrow Icon Overrides for Admin dropdown boxes */
+.select-arrow-fix {
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23888'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 16px;
+    padding-right: 32px !important;
+}
+
+/* ==========================================================================
+   📱 MOBILE BREAKPOINT RESPONSIVENESS (max-width: 768px)
+   ========================================================================== */
+@media screen and (max-width: 768px) {
+    .admin-content-container {
+        padding: 12px 10px !important;
+    }
+
+    .admin-controls-bar {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+        margin-bottom: 20px;
+    }
+
+    .admin-filter-strip {
+        padding: 12px;
+    }
+
+    .admin-filter-dropdown {
+        width: 100%;
+        font-size: 15px !important; /* Prevents auto-zoom in mobile Safari */
+        padding: 10px !important;
+    }
+
+    .admin-order-card-header {
+        padding: 12px;
+        gap: 12px;
+    }
+
+    .header-meta-group {
+        width: 46%; /* Side-by-side meta pairs on small layouts */
+    }
+
+    .header-status-badge-container {
+        width: 100%;
+        margin-top: 4px;
+    }
+
+    .admin-status-badge {
+        width: 100%;
+        text-align: center;
+        padding: 8px;
+    }
+
+    .admin-order-card-body {
+        padding: 12px;
+    }
+
+    .tracking-meta-summary .btn-toggle-edit {
+        float: none !important;
+        display: block;
+        width: 100%;
+        text-align: center;
+        margin-top: 10px;
+        padding: 6px;
+        background: rgba(0, 118, 223, 0.05);
+        border-radius: 4px;
+    }
+
+    .inline-text-box {
+        font-size: 16px !important; /* Prevents text-box scale adjustments on iOS focus */
+        padding: 10px !important;
+    }
+}

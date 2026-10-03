@@ -1,0 +1,71 @@
+@model Ecommerce_Website_MVC.Models.OrderModel
+@{
+    ViewBag.Title = "Order #" + Model.OrderId + " | Show's Garage";
+}
+
+<div style="max-width:1000px;margin:0 auto;padding:20px 15px;">
+    <div class="content-card">
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin-bottom:25px;">
+            <h2 class="page-header" style="margin:0;">Order #@Model.OrderId</h2>
+            <a href="@Url.Action("MyOrders","Order")" style="color:var(--text-muted);font-size:14px;text-decoration:none;font-weight:600;">&larr; Back to My Orders</a>
+        </div>
+
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px;margin-bottom:30px;background:rgba(0,0,0,0.02);padding:20px;border-radius:10px;font-size:14px;">
+            <div><span style="color:var(--text-muted);font-size:12px;display:block;">Date & Time</span><strong>@Model.OrderDate.ToString("dd MMM yyyy HH:mm")</strong></div>
+            <div><span style="color:var(--text-muted);font-size:12px;display:block;">Order Status</span><strong style="color:@(Model.Status=="Approved"?"#28a745":Model.Status=="Cancelled"?"#e50914":"#f0a500");">@Model.Status</strong></div>
+            <div><span style="color:var(--text-muted);font-size:12px;display:block;">Payment Method</span><strong>@Model.PaymentMethod</strong></div>
+            @if (!string.IsNullOrEmpty(Model.TransactionReference) && Model.TransactionReference != "COD-ORDER")
+            {
+                <div><span style="color:var(--text-muted);font-size:12px;display:block;">Transaction Ref</span><strong>@Model.TransactionReference</strong></div>
+            }
+            @if (!string.IsNullOrEmpty(Model.TrackingNumber))
+            {
+                <div><span style="color:var(--text-muted);font-size:12px;display:block;">Tracking Info</span><strong>@Model.TrackingPartner - @Model.TrackingNumber</strong></div>
+            }
+            @if (Model.EstimatedDeliveryDate.HasValue)
+            {
+                <div><span style="color:var(--text-muted);font-size:12px;display:block;">Est. Delivery Date</span><strong>@Model.EstimatedDeliveryDate.Value.ToString("dd MMM yyyy")</strong></div>
+            }
+            <div style="grid-column:1/-1;"><span style="color:var(--text-muted);font-size:12px;display:block;">Shipping Address</span><strong>@Model.ShippingAddress (Pincode: @Model.Pincode)</strong></div>
+        </div>
+
+        <h3 style="margin-bottom:15px;font-family:'Montserrat',sans-serif;font-size:18px;">Items Ordered</h3>
+        <div style="overflow-x:auto;">
+            <table style="width:100%;border-collapse:collapse;font-size:14px;">
+                <thead>
+                    <tr style="background:rgba(0,0,0,.04);text-align:left;">
+                        <th style="padding:12px;">Product</th>
+                        <th style="padding:12px;text-align:center;">Qty</th>
+                        <th style="padding:12px;text-align:right;">Unit Price</th>
+                        <th style="padding:12px;text-align:right;">Line Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Items)
+                    {
+                        <tr style="border-bottom:1px solid rgba(0,0,0,.07);">
+                            <td style="padding:12px;"><strong>@item.BrandName</strong> - @item.Title @(!string.IsNullOrEmpty(item.Scale) ? "(" + item.Scale + ")" : "")</td>
+                            <td style="text-align:center;padding:12px;">@item.Quantity</td>
+                            <td style="text-align:right;padding:12px;">Rs. @item.UnitPrice.ToString("N0")</td>
+                            <td style="text-align:right;padding:12px;">Rs. @item.LineTotal.ToString("N0")</td>
+                        </tr>
+                    }
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="3" style="text-align:right;padding:16px 12px;font-weight:700;">Grand Total</td>
+                        <td style="text-align:right;padding:16px 12px;font-weight:800;font-size:18px;color:#e50914;">Rs. @Model.TotalAmount.ToString("N0")</td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+
+        @if (!string.IsNullOrEmpty(Model.PaymentScreenshotPath) && Model.PaymentScreenshotPath != "COD")
+        {
+            <div style="margin-top:30px;border-top:1px solid rgba(0,0,0,0.08);padding-top:20px;">
+                <h4 style="margin-bottom:10px;">Payment Screenshot</h4>
+                <img src="@Url.Content(Model.PaymentScreenshotPath)" alt="Payment Receipt" style="max-width:320px;border-radius:8px;border:1px solid rgba(0,0,0,.1);" />
+            </div>
+        }
+    </div>
+</div>

@@ -1,0 +1,129 @@
+@model List<Ecommerce_Website_MVC.Models.OrderModel>
+@{
+    ViewBag.Title = "Manage Orders | Admin";
+    string filter = ViewBag.Filter != null ? ViewBag.Filter.ToString() : "ALL";
+}
+@section styles {
+    <link rel="stylesheet" href="~/Assets/css/admin_orders.css" />
+}
+
+@if (TempData["Success"] != null)
+{
+    <div style="background:#28a745;color:#fff;padding:12px 20px;border-radius:6px;margin-bottom:20px;">@TempData["Success"]</div>
+}
+
+<div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin-bottom:25px;">
+    <h2 class="page-header" style="margin:0;">Orders Management</h2>
+    <div class="filter-tabs" style="display:flex;gap:8px;flex-wrap:wrap;">
+        @foreach (var f in new[] { "ALL","Awaiting Verification","Approved","Shipped","Cancelled" })
+        {
+            <a href="@Url.Action("Orders","Admin",new{filter=f})"
+               style="padding:7px 14px;border-radius:5px;font-size:12px;text-decoration:none;border:1px solid rgba(0,0,0,.1);
+                      background:@(filter==f?"#e50914":"transparent");color:@(filter==f?"#fff":"var(--text-main)");">
+                @f
+            </a>
+        }
+    </div>
+</div>
+
+@foreach (var o in Model)
+{
+    <div class="order-admin-card content-card" style="margin-bottom:20px;">
+        <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:15px;">
+            <div>
+                <strong style="font-size:16px;">Order #@o.OrderId</strong>
+                <span style="margin-left:12px;font-size:12px;color:var(--text-muted);">@o.OrderDate.ToString("dd MMM yyyy HH:mm")</span>
+            </div>
+            <span style="padding:5px 12px;border-radius:20px;font-size:12px;font-weight:600;
+                         background:@(o.Status=="Approved"?"rgba(40,167,69,.15)":o.Status=="Cancelled"?"rgba(229,9,20,.1)":"rgba(240,165,0,.15)");
+                         color:@(o.Status=="Approved"?"#28a745":o.Status=="Cancelled"?"#e50914":"#c08000");">
+                @o.Status
+            </span>
+        </div>
+
+        <div style="font-size:13px;color:var(--text-muted);margin-bottom:12px;">
+            <strong>Shipping:</strong> @o.ShippingAddress &nbsp;|&nbsp;
+            <strong>Payment:</strong> @o.PaymentMethod &nbsp;|&nbsp;
+            <strong>Total:</strong> Rs.@o.TotalAmount.ToString("N0")
+        </div>
+
+        <!-- Items -->
+        <div style="margin-bottom:15px;">
+            @foreach (var item in o.Items)
+            {
+                <div style="font-size:13px;padding:4px 0;border-bottom:1px solid rgba(0,0,0,.04);">
+                    @item.BrandName - @item.Title @(!string.IsNullOrEmpty(item.Scale) ? "(" + item.Scale + ")" : "") &nbsp;x&nbsp; @item.Quantity at Rs. @item.UnitPrice.ToString("N0")
+                </div>
+            }
+        </div>
+
+        @if (!string.IsNullOrEmpty(o.PaymentScreenshotPath) && o.PaymentScreenshotPath != "COD")
+        {
+            <div style="margin-bottom:12px;">
+                <a href="@Url.Content(o.PaymentScreenshotPath)" target="_blank"
+                   style="font-size:13px;color:#e50914;">ðŸ“Ž View Payment Screenshot</a>
+            </div>
+        }
+
+        <!-- Update Form -->
+        @using (Html.BeginForm("UpdateOrder","Admin",FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            <input type="hidden" name="orderId" value="@o.OrderId" />
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;align-items:end;">
+                <div>
+                    <label style="font-size:12px;color:var(--text-muted);">TXN Reference</label>
+                    <input type="text" name="txnRef" class="auth-input" value="@o.TransactionReference" style="font-size:13px;" />
+                </div>
+                <div>
+                    <label style="font-size:12px;color:var(--text-muted);">Status</label>
+                    <select name="status" class="auth-input" style="font-size:13px;">
+                        @foreach (var s in new[] { "Awaiting Verification","Approved","Shipped","Cancelled" })
+                        {
+                            <option value="@s" @(o.Status==s?"selected":"")>@s</option>
+                        }
+                    </select>
+                </div>
+                <div>
+                    <label style="font-size:12px;color:var(--text-muted);">Tracking Partner</label>
+                    <input type="text" name="trackPartner" class="auth-input" value="@o.TrackingPartner" style="font-size:13px;" />
+                </div>
+                <div>
+                    <label style="font-size:12px;color:var(--text-muted);">Tracking Number</label>
+                    <input type="text" name="trackNum" class="auth-input" value="@o.TrackingNumber" style="font-size:13px;" />
+                </div>
+                <div>
+                    <label style="font-size:12px;color:var(--text-muted);">Est. Delivery Date</label>
+                    <input type="date" name="estDate" class="auth-input" value="@((o.EstimatedDeliveryDate.HasValue ? o.EstimatedDeliveryDate.Value.ToString("yyyy-MM-dd") : ""))" style="font-size:13px;" />
+                </div>
+                <div style="display:flex;gap:8px;align-items:flex-end;">
+                    <button type="submit" class="buy-btn" style="padding:9px 16px;font-size:12px;">Save</button>
+                </div>
+            </div>
+        }
+
+        @if (o.Status == "Awaiting Verification")
+        {
+            <div style="display:flex;gap:10px;margin-top:10px;">
+                @using (Html.BeginForm("ApproveOrder","Admin",FormMethod.Post,new{style="display:inline"}))
+                {
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" name="orderId" value="@o.OrderId" />
+                    <button type="submit" class="buy-btn" style="background:#28a745;padding:8px 18px;font-size:12px;" onclick="return confirm('Approve this order?')">âœ“ Approve</button>
+                }
+                @using (Html.BeginForm("RejectOrder","Admin",FormMethod.Post,new{style="display:inline"}))
+                {
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" name="orderId" value="@o.OrderId" />
+                    <button type="submit" class="buy-btn" style="background:#e50914;padding:8px 18px;font-size:12px;" onclick="return confirm('Reject & rollback stock?')">âœ• Reject</button>
+                }
+            </div>
+        }
+    </div>
+}
+
+@if (!Model.Any())
+{
+    <p style="color:var(--text-muted);text-align:center;padding:40px;">No orders found for this filter.</p>
+}
+

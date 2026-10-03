@@ -1,0 +1,52 @@
+﻿@model List<Ecommerce_Website_MVC.Models.OrderModel>
+@{
+    ViewBag.Title = "My Orders | Show's Garage";
+}
+@section styles {
+    <link rel="stylesheet" href="~/Assets/css/myOrders.css" />
+}
+
+<h2 class="page-header">My Orders</h2>
+
+@if (!Model.Any())
+{
+    <div style="text-align:center;padding:60px;">
+        <p style="color:var(--text-muted);font-size:16px;">You haven't placed any orders yet.</p>
+        <a href="@Url.Action("Index","Shop")" class="buy-btn" style="display:inline-block;margin-top:15px;padding:12px 28px;">Start Shopping</a>
+    </div>
+}
+else
+{
+    <div class="orders-list">
+        @foreach (var o in Model)
+        {
+            <div class="order-card">
+                <div class="order-card-header">
+                    <div>
+                        <strong>Order #@o.OrderId</strong>
+                        <span style="margin-left:12px;font-size:13px;color:var(--text-muted);">@o.OrderDate.ToString("dd MMM yyyy")</span>
+                    </div>
+                    <span class="order-status-badge status-@(o.Status.ToLower().Replace(" ","_"))">@o.Status</span>
+                </div>
+                <div class="order-card-body">
+                    <div class="order-meta-row">
+                        <span><strong>Total:</strong> Rs.@o.TotalAmount.ToString("N0")</span>
+                        <span><strong>Payment:</strong> @o.PaymentMethod</span>
+                        @if (!string.IsNullOrEmpty(o.TrackingNumber))
+                        {
+                            <span><strong>Tracking:</strong> @o.TrackingPartner â€” @o.TrackingNumber</span>
+                        }
+                        @if (o.EstimatedDeliveryDate.HasValue)
+                        {
+                            <span><strong>Est. Delivery:</strong> @o.EstimatedDeliveryDate.Value.ToString("dd MMM yyyy")</span>
+                        }
+                    </div>
+                    <a href="@Url.Action("Details","Order", new { id = o.OrderId })" class="buy-btn" style="display:inline-block;margin-top:12px;padding:9px 22px;font-size:13px;">
+                        View Details
+                    </a>
+                </div>
+            </div>
+        }
+    </div>
+}
+

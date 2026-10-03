@@ -1,0 +1,102 @@
+﻿/* ==========================================================================
+   Show's Garage - Administrative News Desk & Article Publisher Styles
+   ========================================================================== */
+
+.blogs-split-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    width: 100%;
+}
+
+@media (min-width: 992px) {
+    .blogs-split-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1.2fr) minmax(0, 1.8fr);
+    }
+}
+
+.blog-rich-text {
+    line-height: 1.6 !important;
+    font-family: inherit;
+}
+
+.blog-grid-responsive-scroll {
+    width: 100%;
+    overflow-x: auto;
+    background-color: #141414;
+    -webkit-overflow-scrolling: touch;
+}
+
+.admin-blog-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    min-width: 600px;
+}
+
+    .admin-blog-table th {
+        background-color: #1a1a1a;
+        color: #666;
+        font-weight: 700;
+        text-transform: uppercase;
+        font-size: 11px;
+        padding: 14px 12px;
+        border-bottom: 2px solid #222;
+        letter-spacing: 0.5px;
+    }
+
+    .admin-blog-table td {
+        padding: 14px 12px;
+        border-bottom: 1px solid #1c1c1c;
+        vertical-align: top;
+    }
+
+.blog-row-thumbnail {
+    width: 64px;
+    height: 44px;
+    object-fit: cover;
+    border-radius: 4px;
+    border: 1px solid #262626;
+    background-color: #0d0d0d;
+    display: block;
+    margin: 0 auto;
+}
+
+.blog-row-headline {
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    display: block;
+    line-height: 1.4;
+}
+
+.blog-row-date {
+    display: block;
+    font-family: monospace;
+    font-size: 11px;
+    color: #555;
+    margin-top: 3px;
+}
+
+.blog-row-excerpt-clip {
+    margin: 6px 0 0 0;
+    font-size: 12px;
+    color: #888;
+    line-height: 1.4;
+}
+
+.blog-trigger-link {
+    font-size: 12px;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.edit-mode-color {
+    color: #0076df;
+}
+
+.delete-mode-color {
+    color: #ff3333;
+}

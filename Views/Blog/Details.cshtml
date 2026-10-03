@@ -1,0 +1,23 @@
+﻿@model Ecommerce_Website_MVC.Models.BlogModel
+@{
+    ViewBag.Title = Model.BlogTitle + " | Show's Garage";
+}
+@section styles {
+    <link rel="stylesheet" href="~/Assets/css/blogDetails.css" />
+}
+
+<div class="content-card" style="max-width:860px;margin:0 auto;">
+    <a href="@Url.Action("Index","Blog")" style="color:var(--text-muted);font-size:13px;display:inline-block;margin-bottom:20px;">â† Back to Blog</a>
+
+    @if (!string.IsNullOrEmpty(Model.BlogImage))
+    {
+        <img src="@Url.Content(Model.BlogImage)" alt="@Model.BlogTitle"
+             style="width:100%;max-height:400px;object-fit:cover;border-radius:10px;margin-bottom:25px;" />
+    }
+    <p style="color:var(--text-muted);font-size:13px;margin-bottom:10px;">@Model.PublishDate.ToString("dd MMMM yyyy") â€” @(!string.IsNullOrEmpty(Model.Author) ? "By " + Model.Author : "")</p>
+    <h1 class="page-header">@Model.BlogTitle</h1>
+    <div class="blog-content-body" style="line-height:1.8;color:var(--text-main);">
+        @Html.Raw(Model.Content)
+    </div>
+</div>
+

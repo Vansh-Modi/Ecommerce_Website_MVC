@@ -1,0 +1,28 @@
+﻿@model List<Ecommerce_Website_MVC.Models.BlogModel>
+@{
+    ViewBag.Title = "Blog | Show's Garage";
+}
+@section styles {
+    <link rel="stylesheet" href="~/Assets/css/blogDetails.css" />
+}
+
+<h2 class="page-header">From the Garage Blog</h2>
+
+<div class="my-blog-grid">
+    @foreach (var b in Model)
+    {
+        <article class="my-blog-card">
+            <div class="my-blog-image-wrapper">
+                <img src="@Url.Content(string.IsNullOrEmpty(b.BlogImage)?"~/Assets/images/default-blog.png":b.BlogImage)"
+                     alt="@b.BlogTitle" class="my-blog-image" loading="lazy" />
+            </div>
+            <div class="my-blog-card-body">
+                <span class="my-blog-category">@b.PublishDate.ToString("dd MMM yyyy")</span>
+                <h4>@b.BlogTitle</h4>
+                <p class="blog-excerpt-text">@b.Excerpt</p>
+                <a href="@Url.Action("Details","Blog",new{id=b.BlogId})" class="my-blog-readmore-btn">Read Full Article â†’</a>
+            </div>
+        </article>
+    }
+</div>
+

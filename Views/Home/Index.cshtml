@@ -1,0 +1,140 @@
+﻿@model Ecommerce_Website_MVC.Controllers.HomeViewModel
+@{
+    ViewBag.Title = "Home | Show's Garage";
+}
+@section styles {
+    <link rel="stylesheet" href="~/Assets/css/homePage.css" />
+}
+
+<!-- Hero Showcase Block -->
+<div class="my-hero-wrapper" style="background-image: url('@Url.Content(Model.HeroImg ?? "~/Assets/images/default-hero.jpg")')">
+    <div class="my-hero-overlay"></div>
+    <div class="my-hero-content-box">
+        <h2 class="my-hero-title">@Model.HeroTitle</h2>
+        <p class="my-hero-description">@Model.HeroSubtitle</p>
+        <a href="@Url.Action("Index", "Shop")" class="my-hero-button">Explore Collection</a>
+    </div>
+</div>
+
+<!-- Product Gallery -->
+<div class="my-gallery-container">
+    <div class="my-gallery-header">
+        <h3 class="my-gallery-title">Our Featured Collection</h3>
+    </div>
+    <div class="my-gallery-grid gallery-grid-2" id="galleryGrid">
+        @foreach (var p in Model.Products)
+        {
+            <a href="@Url.Action("Details", "Shop", new { id = p.ProductId })" class="my-gallery-card-link">
+                <div class="my-gallery-card">
+                    <div class="my-gallery-image-wrapper">
+                        <img src="@Url.Content(string.IsNullOrEmpty(p.ImagePath) ? "~/Assets/images/default-model.png" : p.ImagePath)"
+                             alt="@p.Title" class="my-gallery-image" loading="lazy" />
+                    </div>
+                    <div class="my-gallery-card-body">
+                        <h4>@p.BrandName</h4>
+                        <h5>@p.Title</h5>
+                        <p class="gallery-price-tag">Rs.@p.SellingPrice.ToString("N0")</p>
+                        <span class="my-gallery-view-btn">View Model Details</span>
+                    </div>
+                </div>
+            </a>
+        }
+    </div>
+</div>
+
+<!-- Trust Badges -->
+<div class="my-gallery-container">
+    <div class="shipping-badges-row">
+        <div class="badge-box-item">
+            <svg viewBox="0 0 24 24"><path d="M20 8h-3V4H3c-1.1 0-2 .9-2 2v11h2c0 1.66 1.34 3 3 3s3-1.34 3-3h6c0 1.66 1.34 3 3 3s3-1.34 3-3h2v-5l-3-4zM6 18.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm12 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm1.5-6H17V9h2.5l2 3h-2z"/></svg>
+            <h4>Pan India Shipping</h4>
+            <p>Secure premium logistics tracking networks deployed straight to your collection garage room.</p>
+        </div>
+        <div class="badge-box-item">
+            <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
+            <h4>Precision Quality Inspect</h4>
+            <p>Every single model sample receives complete inspection before being dispatched from logistics lines.</p>
+        </div>
+        <div class="badge-box-item">
+            <svg viewBox="0 0 24 24"><path d="M18 7l-1.41-1.41-6.59 6.59-2.59-2.59L6 11l4 4zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"/></svg>
+            <h4>100% Authentic Sourcing</h4>
+            <p>Direct supply loops straight from verified licensed diecast manufacturers and original hobbyist providers.</p>
+        </div>
+    </div>
+</div>
+
+<!-- FAQ Accordion -->
+<div class="my-faq-container">
+    <div class="my-faq-header">
+        <h3 class="my-faq-title">Frequently Asked Questions</h3>
+    </div>
+    <div class="faq-accordion-stack">
+        <div class="faq-accordion-item">
+            <div class="faq-trigger-header" onclick="toggleFaqAccordion(this)">
+                <div class="faq-title-text">
+                    <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 16h-2v-2h1v2zm1.07-7.75l-.9.92C12.45 11.9 12 12.5 12 14h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H7c0-2.76 2.24-5 5-5s5 2.24 5 5c0 1.04-.42 1.99-1.07 2.25z"/></svg>
+                    What are the standard delivery transit times?
+                </div>
+                <span class="faq-arrow-icon">â–¼</span>
+            </div>
+            <div class="faq-content-panel">
+                <div class="faq-inner-text">Orders are packaged in double-walled secure boxes and processed within 24â€“48 working hours. Standard shipping takes 3â€“6 business days across India depending on delivery pincode proximity metrics.</div>
+            </div>
+        </div>
+        <div class="faq-accordion-item">
+            <div class="faq-trigger-header" onclick="toggleFaqAccordion(this)">
+                <div class="faq-title-text">
+                    <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 16h-2v-2h1v2zm1.07-7.75l-.9.92C12.45 11.9 12 12.5 12 14h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H7c0-2.76 2.24-5 5-5s5 2.24 5 5c0 1.04-.42 1.99-1.07 2.25z"/></svg>
+                    How do I inspect and trace the status of my order?
+                </div>
+                <span class="faq-arrow-icon">â–¼</span>
+            </div>
+            <div class="faq-content-panel">
+                <div class="faq-inner-text">Once dispatch validation routines finalize cleanly, an explicit tracking UTR identifier number tracking token will update inside your customer account panel interface instantly.</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Blog Grid -->
+<div class="my-blog-container">
+    <div class="my-blog-header">
+        <h3 class="my-blog-title">Latest From Our Garage Blog</h3>
+    </div>
+    <div class="my-blog-grid">
+        @foreach (var b in Model.LatestBlogs)
+        {
+            <article class="my-blog-card">
+                <div class="my-blog-image-wrapper">
+                    <img src="@Url.Content(string.IsNullOrEmpty(b.BlogImage) ? "~/Assets/images/default-blog.png" : b.BlogImage)"
+                         alt="@b.BlogTitle" class="my-blog-image" loading="lazy" />
+                </div>
+                <div class="my-blog-card-body">
+                    <span class="my-blog-category">Featured Post</span>
+                    <h4>@b.BlogTitle</h4>
+                    <p class="blog-excerpt-text">@b.Excerpt</p>
+                    <a href="@Url.Action("Details", "Blog", new { id = b.BlogId })" class="my-blog-readmore-btn">Read Full Article â†’</a>
+                </div>
+            </article>
+        }
+    </div>
+</div>
+
+@section scripts {
+    <script type="text/javascript">
+        function toggleFaqAccordion(headerElement) {
+            const item = headerElement.parentElement;
+            const contentPanel = item.querySelector('.faq-content-panel');
+            const isOpen = item.classList.contains('active');
+            document.querySelectorAll('.faq-accordion-item').forEach(el => {
+                el.classList.remove('active');
+                el.querySelector('.faq-content-panel').style.maxHeight = null;
+            });
+            if (!isOpen) {
+                item.classList.add('active');
+                contentPanel.style.maxHeight = contentPanel.scrollHeight + "px";
+            }
+        }
+    </script>
+}
+

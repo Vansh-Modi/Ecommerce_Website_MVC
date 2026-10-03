@@ -1,0 +1,55 @@
+﻿@model List<Ecommerce_Website_MVC.Models.UserModel>
+@{
+    ViewBag.Title = "Manage Users | Admin";
+}
+@section styles {
+    <link rel="stylesheet" href="~/Assets/css/admin_users.css" />
+}
+
+
+@if (TempData["Success"] != null) { <div style="background:#28a745;color:#fff;padding:12px 20px;border-radius:6px;margin-bottom:20px;">@TempData["Success"]</div> }
+
+<h2 class="page-header">Users (@Model.Count)</h2>
+
+<div class="content-card" style="overflow-x:auto;">
+    <table style="width:100%;border-collapse:collapse;font-size:13px;">
+        <thead>
+            <tr style="background:rgba(0,0,0,.04);">
+                <th style="padding:10px;text-align:left;">ID</th>
+                <th style="padding:10px;text-align:left;">Name</th>
+                <th style="padding:10px;text-align:left;">Email</th>
+                <th style="padding:10px;text-align:left;">Phone</th>
+                <th style="padding:10px;">Role</th>
+                <th style="padding:10px;">Verified</th>
+                <th style="padding:10px;">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var u in Model)
+            {
+                <tr style="border-bottom:1px solid rgba(0,0,0,.06);">
+                    <td style="padding:10px;">@u.UserId</td>
+                    <td style="padding:10px;">@u.FullName</td>
+                    <td style="padding:10px;">@u.Email</td>
+                    <td style="padding:10px;">@u.Phone</td>
+                    <td style="text-align:center;padding:10px;"><span style="background:@(u.Role=="Admin"?"#e50914":"rgba(0,0,0,.08)");color:@(u.Role=="Admin"?"#fff":"inherit");border-radius:4px;padding:3px 8px;">@u.Role</span></td>
+                    <td style="text-align:center;padding:10px;">@(u.IsVerified ? "âœ“" : "âœ•")</td>
+                    <td style="text-align:center;padding:10px;">
+                        @if (u.Role != "Admin")
+                        {
+                            using (Html.BeginForm("DeleteUser","Admin",FormMethod.Post,new{style="display:inline"}))
+                            {
+                                @Html.AntiForgeryToken()
+                                <input type="hidden" name="userId" value="@u.UserId" />
+                                <button type="submit" class="buy-btn" style="background:#e50914;padding:5px 12px;font-size:11px;" onclick="return confirm('Delete user @u.FullName?')">Delete</button>
+                            }
+                        }
+                        else { <span style="color:var(--text-muted);font-size:12px;">Protected</span> }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+

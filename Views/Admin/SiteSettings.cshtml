@@ -1,0 +1,65 @@
+@model Ecommerce_Website_MVC.Models.SiteSettingsModel
+@{
+    ViewBag.Title = "Site Settings | Admin";
+}
+@section styles {
+    <link rel="stylesheet" href="~/Assets/css/admin_siteSettings.css" />
+}
+
+
+@if (TempData["Success"] != null) { <div style="background:#28a745;color:#fff;padding:12px 20px;border-radius:6px;margin-bottom:20px;">@TempData["Success"]</div> }
+
+<h2 class="page-header">Site Settings</h2>
+
+@using (Html.BeginForm("SaveSiteSettings","Admin",FormMethod.Post,new{enctype="multipart/form-data"}))
+{
+    @Html.AntiForgeryToken()
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:25px;">
+
+        <div class="content-card">
+            <h3 style="margin-bottom:20px;">Branding</h3>
+            <div class="input-group"><label>Logo Title</label><input type="text" name="LogoTitle" class="auth-input" value="@(Model != null ? Model.LogoTitle : null)" /></div>
+            <div class="input-group">
+                <label>Logo Image</label>
+                @if (Model != null && !string.IsNullOrEmpty(Model.Logo)) { <img src="@Url.Content(Model.Logo)" style="height:50px;margin-bottom:8px;display:block;" /> }
+                <input type="file" name="logoFile" accept=".jpg,.jpeg,.png,.webp" style="border:1px solid rgba(0,0,0,.15);border-radius:6px;padding:8px;width:100%;" />
+            </div>
+            <div class="input-group"><label>Copyright Text</label><input type="text" name="Copyright" class="auth-input" value="@(Model != null ? Model.Copyright : null)" /></div>
+        </div>
+
+        <div class="content-card">
+            <h3 style="margin-bottom:20px;">Hero Section</h3>
+            <div class="input-group"><label>Hero Title</label><input type="text" name="HeroTitle" class="auth-input" value="@(Model != null ? Model.HeroTitle : null)" /></div>
+            <div class="input-group"><label>Hero Subtitle</label><input type="text" name="HeroSubtitle" class="auth-input" value="@(Model != null ? Model.HeroSubtitle : null)" /></div>
+            <div class="input-group">
+                <label>Hero Image</label>
+                @if (Model != null && !string.IsNullOrEmpty(Model.HeroImg)) { <img src="@Url.Content(Model.HeroImg)" style="width:100%;max-height:120px;object-fit:cover;border-radius:6px;margin-bottom:8px;" /> }
+                <input type="file" name="heroFile" accept=".jpg,.jpeg,.png,.webp" style="border:1px solid rgba(0,0,0,.15);border-radius:6px;padding:8px;width:100%;" />
+            </div>
+        </div>
+
+        <div class="content-card">
+            <h3 style="margin-bottom:20px;">Contact & Shipping</h3>
+            <div class="input-group"><label>Email</label><input type="email" name="Email" class="auth-input" value="@(Model != null ? Model.Email : null)" /></div>
+            <div class="input-group"><label>Phone</label><input type="tel"   name="PhoneNumber" class="auth-input" value="@(Model != null ? Model.PhoneNumber : null)" /></div>
+            <div class="input-group"><label>Shipping Charges (Rs.)</label><input type="number" name="ShippingCharges" class="auth-input" step="0.01" value="@(Model != null ? Model.ShippingCharges.ToString("0.00") : "0.00")" /></div>
+        </div>
+
+        <div class="content-card">
+            <h3 style="margin-bottom:20px;">Payment Details</h3>
+            <div class="input-group"><label>UPI ID</label><input type="text" name="UpiId" class="auth-input" value="@(Model != null ? Model.UpiId : null)" /></div>
+            <div class="input-group"><label>Bank Account Details</label><textarea name="BankAccountDetails" class="auth-input" rows="3">@(Model != null ? Model.BankAccountDetails : null)</textarea></div>
+            <div class="input-group">
+                <label>QR Code Image</label>
+                @if (Model != null && !string.IsNullOrEmpty(Model.QrCodePath)) { <img src="@Url.Content(Model.QrCodePath)" style="width:120px;margin-bottom:8px;display:block;" /> }
+                <input type="file" name="qrFile" accept=".jpg,.jpeg,.png,.webp" style="border:1px solid rgba(0,0,0,.15);border-radius:6px;padding:8px;width:100%;" />
+            </div>
+        </div>
+    </div>
+
+    <div style="margin-top:25px;">
+        <button type="submit" class="buy-btn" style="padding:13px 30px;font-size:15px;">Save All Settings</button>
+    </div>
+}
+
+

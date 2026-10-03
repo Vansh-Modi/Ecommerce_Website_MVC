@@ -1,0 +1,26 @@
+﻿@{
+    ViewBag.Title = "Order Confirmed | Show's Garage";
+}
+
+<div style="text-align:center;padding:80px 20px;">
+    <div style="font-size:64px;margin-bottom:20px;">âœ…</div>
+    <h2 style="font-family:'Montserrat',sans-serif;font-size:28px;">Order Placed Successfully!</h2>
+    <p style="color:var(--text-muted);margin:15px 0 10px;font-size:16px;">
+        Your Order ID is <strong>#@ViewBag.OrderId</strong>
+    </p>
+    <p style="color:var(--text-muted);font-size:14px;max-width:500px;margin:0 auto 30px;">
+        @if (Session["Checkout_PaymentMethod"] != null && Session["Checkout_PaymentMethod"].ToString() == "COD")
+        {
+            <span>Your COD order has been placed and is awaiting dispatch.</span>
+        }
+        else
+        {
+            <span>We have received your payment screenshot and will verify your order shortly. You'll receive an update in your orders panel.</span>
+        }
+    </p>
+    <div style="display:flex;gap:15px;justify-content:center;flex-wrap:wrap;">
+        <a href="@Url.Action("MyOrders","Order")" class="buy-btn" style="padding:12px 28px;">View My Orders</a>
+        <a href="@Url.Action("Index","Shop")" style="padding:12px 28px;border:1px solid rgba(0,0,0,.15);border-radius:6px;text-decoration:none;color:var(--text-main);">Continue Shopping</a>
+    </div>
+</div>
+

@@ -1,0 +1,199 @@
+﻿<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="author" content="Vansh Modi" />
+    <meta name="designer" content="Vansh Modi" />
+    <title>@ViewBag.Title - Show's Garage</title>
+
+    <!-- Prevent flash before CSS renders -->
+    <script type="text/javascript">
+        (function () {
+            var savedTheme = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+        })();
+    </script>
+
+    <link href="~/Assets/css/siteMaster.css" rel="stylesheet" />
+    <link rel="icon" type="image/png" href="~/Assets/images/icons/logo.png" />
+
+    @RenderSection("styles", required: false)
+</head>
+<body>
+    <div class="wrapper">
+        <header>
+            <div id="nav-bar">
+                <div class="header-top">
+                    <!-- Logo -->
+                    <div id="logo-section">
+                        @{
+                            string logoSrc  = ViewBag.SiteLogo  ?? "~/Assets/images/icons/logo.png";
+                            string logoAlt  = ViewBag.SiteTitle ?? "Show's Garage";
+                            string logoHref = Session["UserRole"] != null && Session["UserRole"].ToString() == "Admin"
+                                             ? Url.Action("Dashboard", "Admin")
+                                             : Url.Action("Index", "Home");
+                        }
+                        <a href="@logoHref">
+                            <img src="@Url.Content(logoSrc)" alt="@logoAlt" class="logo-img" />
+                        </a>
+                    </div>
+
+                    <!-- Search bar -->
+                    <div id="search-bar">
+                        <form action="@Url.Action("Index", "Shop")" method="get" style="display:flex;width:100%;">
+                            <input type="text" name="search" placeholder="Search car..." value="@Request.QueryString["search"]" />
+                            <button type="submit" class="search-icon" style="background:none;border:none;cursor:pointer;padding:0;width:46px;">
+                                <img src="~/Assets/images/icons/search.png" alt="Search" style="width:18px;height:18px;filter:brightness(0) invert(0);" />
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- Utility buttons -->
+                    <div id="utility-buttons">
+                        @if (Session["UserRole"] != null && Session["UserRole"].ToString() == "Admin")
+                        {
+                            <!-- Admin icons -->
+                            <div class="icon-group">
+                                <div class="theme-switch-wrapper">
+                                    <button type="button" class="sliding-toggle-btn" aria-label="Toggle Theme">
+                                        <span class="toggle-slider"></span>
+                                        <span class="toggle-icon sun-icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+                                        </span>
+                                        <span class="toggle-icon moon-icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+                                        </span>
+                                    </button>
+                                </div>
+                                <a href="@Url.Action("Profile", "Account")">
+                                    <img src="~/Assets/images/icons/account.png" class="nav-icon" alt="Account" />
+                                </a>
+                                <a href="@Url.Action("Logout", "Account")">
+                                    <img src="~/Assets/images/icons/logout.png" class="nav-icon" alt="Logout" />
+                                </a>
+                            </div>
+                        }
+                        else
+                        {
+                            <!-- User icons -->
+                            <div class="icon-group">
+                                <div class="theme-switch-wrapper">
+                                    <button type="button" class="sliding-toggle-btn" aria-label="Toggle Theme">
+                                        <span class="toggle-slider"></span>
+                                        <span class="toggle-icon sun-icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+                                        </span>
+                                        <span class="toggle-icon moon-icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+                                        </span>
+                                    </button>
+                                </div>
+                                <a href="@Url.Action("Index", "Cart")">
+                                    <img src="~/Assets/images/icons/cart.png" class="nav-icon" alt="Cart" />
+                                </a>
+                                <a href="@Url.Action("Profile", "Account")">
+                                    <img src="~/Assets/images/icons/account.png" class="nav-icon" alt="Account" />
+                                </a>
+                                @if (Session["UserRole"] != null)
+                                {
+                                    <a href="@Url.Action("Logout", "Account")">
+                                        <img src="~/Assets/images/icons/logout.png" class="nav-icon" alt="Logout" />
+                                    </a>
+                                }
+                            </div>
+                        }
+                    </div>
+                </div>
+
+                <!-- Navigation -->
+                <div class="header-bottom">
+                    @if (Session["UserRole"] != null && Session["UserRole"].ToString() == "Admin")
+                    {
+                        <nav id="admin-nav">
+                            <ul>
+                                <li><a href="@Url.Action("Orders",       "Admin")">Orders</a></li>
+                                <li><a href="@Url.Action("Products",     "Admin")">Inventory</a></li>
+                                <li><a href="@Url.Action("Users",        "Admin")">Users</a></li>
+                                <li><a href="@Url.Action("Blog",         "Admin")">Blog</a></li>
+                                <li><a href="@Url.Action("SiteSettings", "Admin")">Site Settings</a></li>
+                            </ul>
+                        </nav>
+                    }
+                    else
+                    {
+                        <nav id="user-nav">
+                            <ul>
+                                <li><a href="@Url.Action("Index",    "Home")">Home</a></li>
+                                <li><a href="@Url.Action("Index",    "Shop")">Collections</a></li>
+                                <li><a href="@Url.Action("MyOrders", "Order")">Orders</a></li>
+                                <li><a href="@Url.Action("Index",    "Cart")">Cart</a></li>
+                            </ul>
+                        </nav>
+                    }
+                </div>
+            </div>
+        </header>
+
+        <div class="main-container">
+            @RenderBody()
+        </div>
+
+        <footer>
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4 class="gold-text">@(ViewBag.SiteTitle != null ? ViewBag.SiteTitle.ToString().ToUpper() : "SHOW'S GARAGE")</h4>
+                    <p>Your premium destination for precision collectibles.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Policies</h4>
+                    <a href="@Url.Action("Privacy",  "Other")">Privacy Policy</a>
+                    <a href="@Url.Action("Shipping", "Other")">Shipping Info</a>
+                </div>
+                <div class="footer-section">
+                    <h4>Customer Service</h4>
+                    <a href="@Url.Action("Contact", "Other")">Contact Us &amp; Feedback</a>
+                    @if (ViewBag.SiteEmail != null && !string.IsNullOrEmpty(ViewBag.SiteEmail.ToString()))
+                    {
+                        <a href="mailto:@ViewBag.SiteEmail">Email Support</a>
+                    }
+                    @if (ViewBag.SitePhone != null && !string.IsNullOrEmpty(ViewBag.SitePhone.ToString()))
+                    {
+                        <a href="tel:@ViewBag.SitePhone">Call Us</a>
+                    }
+                </div>
+                <div class="footer-section">
+                    <h4>Stay Updated</h4>
+                    <p>Join the garage for new case drops and exclusive diecast news.</p>
+                    <div class="newsletter-container">
+                        <input type="email" class="footer-input" placeholder="Your Email Address" id="footerEmailInput" />
+                        <button type="button" class="footer-btn" onclick="document.getElementById('footerEmailInput').value=''">JOIN</button>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                @Html.Raw(ViewBag.Copyright ?? "&copy; " + DateTime.Now.Year + " Shows Garage")
+                | Crafted for Hobbyists <a href="/Other/Privacy" class="developer-link">Vansh Modi</a>
+            </div>
+        </footer>
+    </div>
+
+    <script type="text/javascript">
+        window.addEventListener('DOMContentLoaded', function () {
+            // Theme toggle
+            var themeButtons = document.querySelectorAll('.sliding-toggle-btn');
+            themeButtons.forEach(function (btn) {
+                btn.addEventListener('click', function () {
+                    var target = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+                    document.documentElement.setAttribute('data-theme', target);
+                    localStorage.setItem('theme', target);
+                });
+            });
+        });
+    </script>
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>
+
+

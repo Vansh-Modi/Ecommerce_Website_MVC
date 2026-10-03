@@ -1,0 +1,110 @@
+﻿@{
+    ViewBag.Title = "My Profile | Show's Garage";
+}
+@section styles {
+    <link rel="stylesheet" href="~/Assets/css/profile.css" />
+    <link rel="stylesheet" href="~/Assets/css/login.css" />
+    <link rel="stylesheet" href="~/Assets/css/login.css" />
+}
+
+<div class="profile-wrapper">
+    <div class="profile-card">
+        <div class="profile-header">
+            <h2>Welcome, <span style="color:#e50914;">@Session["UserName"]</span></h2>
+            <p style="color:var(--text-muted);">Manage your account details and password</p>
+        </div>
+
+        @if (TempData["Success"] != null) { <div class="msg-success" style="color:#28a745;padding:10px;border:1px solid #28a745;border-radius:6px;margin-bottom:15px;">@TempData["Success"]</div> }
+        @if (TempData["Error"]   != null) { <div class="msg-error"   style="color:#e50914;padding:10px;border:1px solid #e50914;border-radius:6px;margin-bottom:15px;">@TempData["Error"]</div>   }
+
+        <!-- Update Info -->
+        @using (Html.BeginForm("UpdateProfile", "Account", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            <h4 style="margin-bottom:15px;">Profile Details</h4>
+            <div class="input-group">
+                <label>Full Name</label>
+                <input type="text" name="fullName" class="auth-input" value="@ViewBag.FullName" required />
+            </div>
+            <div class="input-group">
+                <label>Phone</label>
+                <input type="tel" name="phone" class="auth-input" value="@ViewBag.Phone" />
+            </div>
+            <div class="input-group">
+                <label>Email (read-only)</label>
+                <input type="email" class="auth-input" value="@ViewBag.Email" disabled />
+            </div>
+            <button type="submit" class="auth-btn">UPDATE PROFILE</button>
+        }
+
+        <hr style="margin:30px 0;opacity:0.15;" />
+
+        <!-- Change Password -->
+        <h4 style="margin-bottom:15px;">Change Password</h4>
+        @using (Html.BeginForm("UpdatePassword", "Account", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            <input type="hidden" name="useOtp" value="false" id="useOtpField" />
+            <div id="standardReset">
+                <div class="input-group">
+                    <label>Current Password</label>
+                    <input type="password" name="currentPassword" id="txtCurrentPassword" class="auth-input" placeholder="â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢" />
+                </div>
+                <div style="margin-bottom:10px;">
+                    <a href="@Url.Action("SendProfileOtp", "Account")" onclick="return sendProfileOtp(event);" style="color:#aaa;font-size:13px;">Forgot current password? Send OTP</a>
+                </div>
+            </div>
+            <div id="otpSection" style="display:none;">
+                <div class="input-group">
+                    <label>OTP Code (sent to your email)</label>
+                    <input type="text" name="profileOtp" class="auth-input" placeholder="6-digit code" />
+                </div>
+                <div style="margin-bottom:10px;">
+                    <a href="#" onclick="cancelOtp(event);" style="color:#aaa;font-size:13px;">Cancel Recovery Mode</a>
+                </div>
+            </div>
+            <div class="input-group">
+                <label>New Password</label>
+                <input type="password" name="newPassword" class="auth-input" placeholder="â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢" required />
+            </div>
+            <div class="input-group">
+                <label>Confirm New Password</label>
+                <input type="password" name="confirmNewPassword" class="auth-input" placeholder="â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢" required />
+            </div>
+            <button type="submit" class="auth-btn">UPDATE PASSWORD</button>
+        }
+    </div>
+</div>
+
+@if (TempData["OtpSent"] != null)
+{
+    <script>
+        document.getElementById('otpSection').style.display = 'block';
+        document.getElementById('standardReset').style.display = 'none';
+        document.getElementById('useOtpField').value = 'true';
+    </script>
+}
+
+@section scripts {
+    <script type="text/javascript">
+        function sendProfileOtp(e) {
+            e.preventDefault();
+            fetch('@Url.Action("SendProfileOtp", "Account")', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'RequestVerificationToken': document.querySelector('[name="__RequestVerificationToken"]').value
+                }
+            }).then(() => location.reload());
+        }
+        function cancelOtp(e) {
+            e.preventDefault();
+            document.getElementById('otpSection').style.display = 'none';
+            document.getElementById('standardReset').style.display = 'block';
+            document.getElementById('useOtpField').value = 'false';
+        }
+    </script>
+}
+
+
+

@@ -1,0 +1,157 @@
+﻿/* ==========================================================================
+   Show's Garage - Administrative Support Mailbox Stack Styling Interface
+   ========================================================================== */
+
+.badge-support {
+    color: #ff9800 !important;
+    background-color: rgba(255, 152, 0, 0.08) !important;
+    border-color: #ff9800 !important;
+}
+
+.support-tickets-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+}
+
+.ticket-card-panel {
+    background-color: #141414;
+    border: 1px solid #222222;
+    border-radius: 8px;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.ticket-header-strip {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    border-bottom: 1px solid #222;
+    padding-bottom: 12px;
+    margin-bottom: 15px;
+}
+
+.ticket-author-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.author-avatar {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background-color: #ff5722;
+    color: #fff;
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+}
+
+.author-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.author-name {
+    color: #ffffff;
+    font-size: 14px;
+}
+
+.author-email-link {
+    color: #0076df;
+    font-size: 12px;
+    text-decoration: none;
+}
+
+    .author-email-link:hover {
+        text-decoration: underline;
+    }
+
+.ticket-id-tag {
+    font-family: monospace;
+    font-size: 12px;
+    color: #555;
+    font-weight: 700;
+}
+
+.ticket-body-content {
+    margin-bottom: 20px;
+}
+
+.ticket-message-paragraph {
+    margin: 0;
+    font-size: 14px;
+    color: #cccccc;
+    line-height: 1.6;
+    white-space: pre-wrap;
+}
+
+/* Operational Command Execution Layout Row Trigger Buttons */
+.ticket-footer-actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.btn-ticket-reply, .btn-ticket-archive {
+    padding: 8px 16px;
+    font-size: 12px;
+    font-weight: 700;
+    border-radius: 4px;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    text-align: center;
+    transition: filter 0.15s ease;
+}
+
+    .btn-ticket-reply:hover, .btn-ticket-archive:hover {
+        filter: brightness(1.1);
+    }
+
+.btn-ticket-reply {
+    background-color: #0076df;
+    color: #ffffff;
+}
+
+.btn-ticket-archive {
+    background-color: #222222;
+    border: 1px solid #333;
+    color: #aaaaaa;
+}
+
+/* Empty Mailbox Cards Styles */
+.empty-mailbox-card {
+    background-color: #141414;
+    border: 1px solid #222;
+    padding: 50px 20px;
+    border-radius: 8px;
+    text-align: center;
+    max-width: 400px;
+    margin: 40px auto;
+}
+
+.mailbox-icon {
+    font-size: 40px;
+    margin-bottom: 12px;
+}
+
+.empty-mailbox-card h3 {
+    font-size: 16px;
+    text-transform: uppercase;
+    margin: 0 0 6px 0;
+}
+
+.empty-mailbox-card p {
+    font-size: 13px;
+    color: #555;
+    margin: 0;
+}

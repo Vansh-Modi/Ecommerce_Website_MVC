@@ -1,0 +1,164 @@
+@{
+    ViewBag.Title = "Manage Products | Admin";
+    var products   = ViewBag.Products   as List<Ecommerce_Website_MVC.Models.ProductModel>   ?? new List<Ecommerce_Website_MVC.Models.ProductModel>();
+    var categories = ViewBag.Categories as List<Ecommerce_Website_MVC.Models.CategoryModel> ?? new List<Ecommerce_Website_MVC.Models.CategoryModel>();
+}
+@section styles {
+    <link rel="stylesheet" href="~/Assets/css/admin_products.css" />
+}
+
+@if (TempData["Success"] != null) { <div style="background:#28a745;color:#fff;padding:12px 20px;border-radius:6px;margin-bottom:20px;">@TempData["Success"]</div> }
+@if (TempData["Error"]   != null) { <div style="background:#e50914;color:#fff;padding:12px 20px;border-radius:6px;margin-bottom:20px;">@TempData["Error"]</div>   }
+
+<div style="display:flex;gap:20px;flex-wrap:wrap;align-items:flex-start;">
+
+    <!-- LEFT: Product Form -->
+    <div class="content-card" style="flex:1;min-width:300px;" id="productFormSection">
+        <h3 style="margin-bottom:20px;" id="formTitle">Add New Product</h3>
+        @using (Html.BeginForm("SaveProduct","Admin",FormMethod.Post, new{enctype="multipart/form-data"}))
+        {
+            @Html.AntiForgeryToken()
+            <input type="hidden" name="productId"    id="editProductId" value="" />
+            <input type="hidden" name="currentImgPath" id="currentImgPath" value="" />
+            <div class="input-group"><label>Title *</label><input type="text"  name="title"         id="eTitle"    class="auth-input" required /></div>
+            <div class="input-group"><label>Brand Name</label><input type="text" name="brandName"     id="eBrand"    class="auth-input" /></div>
+            <div class="input-group">
+                <label>Category *</label>
+                <select name="categoryId" id="eCat" class="auth-input" required>
+                    @foreach (var c in categories)
+                    {
+                        <option value="@c.CategoryId">@c.CategoryName</option>
+                    }
+                </select>
+            </div>
+            <div class="input-group"><label>Scale</label><input type="text"   name="scale"         id="eScale"    class="auth-input" placeholder="1:18" /></div>
+            <div class="input-group"><label>Description</label><textarea name="description" id="eDesc" class="auth-input" rows="3"></textarea></div>
+            <div class="input-group"><label>Cost Price *</label><input type="number" name="costPrice" id="eCost" class="auth-input" step="0.01" required /></div>
+            <div class="input-group"><label>Selling Price *</label><input type="number" name="sellingPrice" id="eSP" class="auth-input" step="0.01" required /></div>
+            <div class="input-group"><label>MRP *</label><input type="number" name="mrp" id="eMRP" class="auth-input" step="0.01" required /></div>
+            <div class="input-group"><label>Stock Quantity *</label><input type="number" name="stockQuantity" id="eStock" class="auth-input" required /></div>
+            <div class="input-group">
+                <label>Product Image</label>
+                <input type="file" name="productImg" accept=".jpg,.jpeg,.png,.webp" style="border:1px solid rgba(0,0,0,.15);border-radius:6px;padding:8px;width:100%;" />
+            </div>
+            <div class="input-group" style="display:flex;align-items:center;gap:10px;">
+                <input type="checkbox" name="isNewArrival" id="eNA" value="true" /> <label for="eNA">New Arrival</label>
+            </div>
+            <button type="submit" class="buy-btn" style="padding:11px 25px;">Save Product</button>
+            <button type="button" onclick="clearProductForm()" style="margin-left:10px;padding:11px 20px;border:1px solid rgba(0,0,0,.15);border-radius:6px;background:transparent;cursor:pointer;">Clear</button>
+        }
+    </div>
+
+    <!-- RIGHT: Product list + Category management -->
+    <div style="flex:2;min-width:320px;">
+        <!-- Category Section -->
+        <div class="content-card" style="margin-bottom:20px;">
+            <h3 style="margin-bottom:15px;">Categories</h3>
+            @using (Html.BeginForm("SaveCategory","Admin",FormMethod.Post,new{style="display:flex;gap:10px;align-items:flex-end;flex-wrap:wrap;"}))
+            {
+                @Html.AntiForgeryToken()
+                <input type="hidden" name="categoryId" id="editCatId" value="" />
+                <div style="flex:1;min-width:180px;">
+                    <input type="text" name="categoryName" id="catName" class="auth-input" placeholder="Category name" required />
+                </div>
+                <button type="submit" class="buy-btn" style="padding:9px 18px;font-size:13px;">Save</button>
+                <button type="button" onclick="clearCatForm()" style="padding:9px 14px;border:1px solid rgba(0,0,0,.15);border-radius:6px;background:transparent;cursor:pointer;font-size:13px;">Clear</button>
+            }
+            <div style="margin-top:12px;display:flex;flex-wrap:wrap;gap:8px;">
+                @foreach (var c in categories)
+                {
+                    <span style="background:rgba(0,0,0,.06);border-radius:20px;padding:5px 12px;font-size:13px;display:flex;align-items:center;gap:8px;">
+                        @c.CategoryName
+                        <button type="button" onclick="editCat(@c.CategoryId,'@c.CategoryName')" style="background:none;border:none;cursor:pointer;color:#e50914;font-size:12px;">Edit</button>
+                        @using (Html.BeginForm("DeleteCategory","Admin",FormMethod.Post,new{style="display:inline"}))
+                        {
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="categoryId" value="@c.CategoryId" />
+                            <button type="submit" style="background:none;border:none;cursor:pointer;color:#e50914;font-size:12px;" onclick="return confirm('Delete category?')">Del</button>
+                        }
+                    </span>
+                }
+            </div>
+        </div>
+
+        <!-- Products Table -->
+        <div class="content-card">
+            <h3 style="margin-bottom:15px;">All Products (@products.Count)</h3>
+            <div style="overflow-x:auto;">
+                <table style="width:100%;border-collapse:collapse;font-size:13px;">
+                    <thead>
+                        <tr style="background:rgba(0,0,0,.04);">
+                            <th style="padding:10px;text-align:left;">Image</th>
+                            <th style="padding:10px;text-align:left;">Title</th>
+                            <th style="padding:10px;">Stock</th>
+                            <th style="padding:10px;">Price</th>
+                            <th style="padding:10px;">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var p in products)
+                        {
+                            <tr style="border-bottom:1px solid rgba(0,0,0,.06);">
+                                <td style="padding:8px;"><img src="@Url.Content(p.ImagePath)" style="width:48px;height:40px;object-fit:cover;border-radius:4px;" /></td>
+                                <td style="padding:8px;"><strong>@p.BrandName</strong><br/><span style="color:var(--text-muted);">@p.Title</span></td>
+                                <td style="text-align:center;padding:8px;color:@(p.StockQuantity==0?"#e50914":p.StockQuantity<=2?"#f0a500":"inherit");">@p.StockQuantity</td>
+                                <td style="text-align:center;padding:8px;">Rs. @p.SellingPrice.ToString("N0")</td>
+                                <td style="text-align:center;padding:8px;">
+                                    <button type="button" onclick="editProduct(@p.ProductId,'@Html.Raw(p.Title.Replace("'","\\'"))','@p.BrandName','@p.CategoryId','@p.Scale','@Html.Raw(p.Description != null ? p.Description.Replace("'","\\'").Replace("\n","\\n").Replace("\r","") : "")','@p.CostPrice','@p.SellingPrice','@p.MRP','@p.StockQuantity','@p.IsNewArrival.ToString().ToLower()','@p.ImagePath')" class="buy-btn" style="padding:5px 12px;font-size:11px;">Edit</button>
+                                    @using (Html.BeginForm("DeleteProduct","Admin",FormMethod.Post,new{style="display:inline"}))
+                                    {
+                                        @Html.AntiForgeryToken()
+                                        <input type="hidden" name="productId" value="@p.ProductId" />
+                                        <button type="submit" class="buy-btn" style="background:#e50914;padding:5px 12px;font-size:11px;" onclick="return confirm('Delete @p.Title?')">Del</button>
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script type="text/javascript">
+        function editProduct(id,title,brand,catId,scale,desc,cost,sp,mrp,stock,isNew,imgPath){
+            document.getElementById('formTitle').textContent = 'Edit Product';
+            document.getElementById('editProductId').value = id;
+            document.getElementById('eTitle').value         = title;
+            document.getElementById('eBrand').value         = brand;
+            document.getElementById('eCat').value           = catId;
+            document.getElementById('eScale').value         = scale;
+            document.getElementById('eDesc').value          = desc;
+            document.getElementById('eCost').value          = cost;
+            document.getElementById('eSP').value            = sp;
+            document.getElementById('eMRP').value           = mrp;
+            document.getElementById('eStock').value         = stock;
+            document.getElementById('eNA').checked          = isNew === 'true';
+            document.getElementById('currentImgPath').value = imgPath;
+            document.getElementById('productFormSection').scrollIntoView({behavior:'smooth'});
+        }
+        function clearProductForm(){
+            document.getElementById('formTitle').textContent = 'Add New Product';
+            document.getElementById('editProductId').value   = '';
+            document.getElementById('currentImgPath').value  = '';
+            document.querySelectorAll('#productFormSection input:not([type=hidden]), #productFormSection textarea, #productFormSection select').forEach(function(el){ el.value=''; });
+            document.getElementById('eNA').checked = false;
+        }
+        function editCat(id, name){
+            document.getElementById('editCatId').value = id;
+            document.getElementById('catName').value   = name;
+        }
+        function clearCatForm(){
+            document.getElementById('editCatId').value = '';
+            document.getElementById('catName').value   = '';
+        }
+    </script>
+}
+
+
+
+
+
+

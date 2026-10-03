@@ -1,0 +1,56 @@
+@{
+    ViewBag.Title = "Contact Us | Show's Garage";
+}
+@section styles {
+    <link rel="stylesheet" href="~/Assets/css/contactUs.css" />
+}
+
+<div class="contact-wrapper">
+    <h2 class="page-header">Get In Touch</h2>
+
+    @if (TempData["Success"] != null)
+    {
+        <div style="background:#28a745;color:#fff;padding:14px 20px;border-radius:6px;margin-bottom:20px;">@TempData["Success"]</div>
+    }
+
+    <div class="contact-layout" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:30px;">
+        <!-- Form -->
+        <div class="content-card">
+            @using (Html.BeginForm("Contact","Other",FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                if (ViewBag.Error != null && !string.IsNullOrEmpty(ViewBag.Error.ToString()))
+                {
+                    <div style="color:#e50914;font-size:13px;margin-bottom:12px;">@ViewBag.Error</div>
+                }
+                <div class="input-group"><label>Your Name *</label><input type="text" name="name" class="auth-input" placeholder="John Doe" required /></div>
+                <div class="input-group"><label>Email Address *</label><input type="email" name="email" class="auth-input" placeholder="name@email.com" required /></div>
+                <div class="input-group"><label>Message *</label><textarea name="message" class="auth-input" rows="5" placeholder="How can we help you?" required></textarea></div>
+                <button type="submit" class="buy-btn" style="padding:12px 28px;">SEND MESSAGE</button>
+            }
+        </div>
+
+        <!-- Contact Info -->
+        <div style="padding-top:10px;">
+            @if (ViewBag.Email != null && !string.IsNullOrEmpty(ViewBag.Email.ToString()))
+            {
+                <div style="margin-bottom:20px;">
+                    <h4 style="margin-bottom:5px;">Email</h4>
+                    <a href="mailto:@ViewBag.Email" style="color:var(--text-muted);">@ViewBag.Email</a>
+                </div>
+            }
+            @if (ViewBag.Phone != null && !string.IsNullOrEmpty(ViewBag.Phone.ToString()))
+            {
+                <div style="margin-bottom:20px;">
+                    <h4 style="margin-bottom:5px;">Phone</h4>
+                    <a href="tel:@ViewBag.Phone" style="color:var(--text-muted);">@ViewBag.Phone</a>
+                </div>
+            }
+            <div>
+                <h4 style="margin-bottom:5px;">Business Hours</h4>
+                <p style="color:var(--text-muted);font-size:14px;">Mon â€“ Sat: 10 AM â€“ 7 PM IST</p>
+            </div>
+        </div>
+    </div>
+</div>
+

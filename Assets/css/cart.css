@@ -1,0 +1,423 @@
+﻿/* ==========================================================================
+   Show's Garage - Cohesive Shopping Cart Functional Layout Framework
+   ========================================================================== */
+
+.shop-theme-wrapper {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.shop-content-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 10px 15px 40px 15px;
+    box-sizing: border-box;
+}
+
+.cart-layout-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    margin-top: 10px;
+    box-sizing: border-box;
+}
+
+@media (min-width: 992px) {
+    .cart-layout-container {
+        flex-direction: row;
+        align-items: flex-start;
+        gap: 30px;
+    }
+}
+
+/* ==========================================================================
+   Controls Bar & Dynamic Navigation Link Toggles
+   ========================================================================== */
+.shop-controls-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    border-bottom: 2px solid var(--text-main);
+    padding-bottom: 15px;
+    gap: 15px;
+    flex-wrap: wrap;
+    transition: border-color 0.3s ease;
+}
+
+.shop-main-heading {
+    color: var(--text-main);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 24px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin: 0;
+    transition: color 0.3s ease;
+}
+
+.btn-filter-pill {
+    display: inline-flex;
+    align-items: center;
+    color: var(--text-muted);
+    background-color: var(--card-bg);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    padding: 8px 18px;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 50px;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+}
+
+[data-theme="dark"] .btn-filter-pill {
+    border-color: rgba(255, 255, 255, 0.04);
+}
+
+.btn-filter-pill:hover {
+    color: var(--text-main);
+    border-color: #e50914 !important;
+    background-color: var(--header-bg);
+    box-shadow: 0 4px 12px rgba(229, 9, 20, 0.15);
+    padding-left: 14px;
+    padding-right: 22px;
+}
+
+.btn-filter-pill:active {
+    transform: scale(0.97);
+}
+
+/* --- Left Segment Items Grid Column Layout --- */
+.cart-items-column {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.cart-empty-text {
+    color: var(--text-muted);
+    font-size: 16px;
+    padding: 40px 0;
+    text-align: center;
+    display: block;
+}
+
+/* Individual Cart Product Row Components */
+.cart-item-row {
+    background-color: var(--card-bg);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    border-radius: 12px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 15px;
+    position: relative;
+    box-sizing: border-box;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.02);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+[data-theme="dark"] .cart-item-row {
+    border-color: rgba(255, 255, 255, 0.04);
+}
+
+@media (min-width: 576px) {
+    .cart-item-row {
+        flex-direction: row;
+        flex-wrap: nowrap;
+        align-items: center;
+    }
+}
+
+.cart-item-image-frame {
+    width: 75px;
+    height: 75px;
+    background-color: rgba(0, 0, 0, 0.02);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    border-radius: 8px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+    .cart-item-image-frame img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+.cart-item-details {
+    flex: 1;
+    min-width: 140px;
+    text-align: left;
+    padding-right: 35px;
+}
+
+@media (min-width: 576px) {
+    .cart-item-details {
+        padding-left: 12px;
+        padding-right: 0;
+    }
+}
+
+.cart-item-brand {
+    color: #e50914; /* Swapped out deep blue parameters for active performance racing highlights */
+    font-size: 11px;
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    display: block;
+}
+
+.cart-item-title {
+    color: var(--text-main);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 15px;
+    margin: 4px 0 6px 0;
+    font-weight: 700;
+    line-height: 1.4;
+}
+
+.cart-item-price {
+    color: var(--text-muted);
+    font-size: 14px;
+    display: block;
+}
+
+/* Right Structural Actions Component Row Strip */
+.cart-item-actions {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+    padding-top: 16px;
+    margin-top: 5px;
+}
+
+[data-theme="dark"] .cart-item-actions {
+    border-top-color: rgba(255,255,255,0.03);
+}
+
+@media (min-width: 576px) {
+    .cart-item-actions {
+        width: auto;
+        border-top: none;
+        padding-top: 0;
+        margin-top: 0;
+        gap: 30px;
+    }
+}
+
+.quantity-control-wrapper {
+    display: inline-flex;
+    align-items: center;
+    background-color: var(--body-bg);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    border-radius: 6px;
+    overflow: hidden;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+[data-theme="dark"] .quantity-control-wrapper {
+    border-color: rgba(255, 255, 255, 0.03);
+}
+
+.qty-btn {
+    color: var(--text-main);
+    text-decoration: none;
+    padding: 8px 16px;
+    font-weight: bold;
+    font-size: 16px;
+    background-color: transparent;
+    transition: background-color 0.2s;
+    user-select: none;
+}
+
+    .qty-btn:hover {
+        background-color: rgba(0, 0, 0, 0.05);
+    }
+
+[data-theme="dark"] .qty-btn:hover {
+    background-color: rgba(255, 255, 255, 0.03);
+}
+
+.qty-display-text {
+    color: var(--text-main);
+    min-width: 30px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.item-subtotal-block {
+    text-align: right;
+    white-space: nowrap;
+}
+
+@media (min-width: 576px) {
+    .item-subtotal-block {
+        text-align: center;
+    }
+}
+
+.subtotal-label {
+    color: var(--text-muted);
+    font-size: 11px;
+    display: block;
+    text-transform: uppercase;
+}
+
+@media (min-width: 576px) {
+    .subtotal-label {
+        display: none;
+    }
+}
+
+.subtotal-amount {
+    color: var(--text-main);
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.cart-remove-btn {
+    color: #ff4d4d;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 6px 10px;
+    border-radius: 4px;
+    transition: background-color 0.2s;
+    position: absolute;
+    top: 14px;
+    right: 14px;
+}
+
+@media (min-width: 576px) {
+    .cart-remove-btn {
+        position: static;
+        padding: 6px 12px;
+    }
+}
+
+.cart-remove-btn:hover {
+    background-color: rgba(255, 77, 77, 0.08);
+}
+
+/* ==========================================================================
+   Right Summary Panel Card Block Specs
+   ========================================================================== */
+.cart-summary-column {
+    flex: 1;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+@media (min-width: 992px) {
+    .cart-summary-column {
+        position: sticky;
+        top: 30px;
+    }
+}
+
+.summary-card {
+    background-color: var(--card-bg);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    border-radius: 12px;
+    padding: 24px;
+    box-sizing: border-box;
+    text-align: left;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+[data-theme="dark"] .summary-card {
+    border-color: rgba(255, 255, 255, 0.04);
+}
+
+.summary-card-title {
+    color: var(--text-main);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 18px;
+    margin: 0 0 20px 0;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    padding-bottom: 12px;
+}
+
+[data-theme="dark"] .summary-card-title {
+    border-bottom-color: rgba(255, 255, 255, 0.04);
+}
+
+.summary-data-row {
+    display: flex;
+    justify-content: space-between;
+    color: var(--text-muted);
+    font-size: 14.5px;
+    margin-bottom: 14px;
+}
+
+.total-highlight-row {
+    border-top: 1px dashed rgba(0, 0, 0, 0.1);
+    margin-top: 18px;
+    padding-top: 18px;
+    color: var(--text-main);
+    font-size: 16px;
+}
+
+[data-theme="dark"] .total-highlight-row {
+    border-top-color: rgba(255, 255, 255, 0.08);
+}
+
+.total-green-price {
+    color: var(--text-main) !important;
+    font-family: 'Inter', sans-serif;
+    font-weight: 800;
+    font-size: 22px;
+}
+
+.summary-actions-block {
+    margin-top: 24px;
+}
+
+.btn-checkout-large {
+    background-color: var(--brand-racing-yellow) !important; /* Bound strictly to intense vivid yellow lines */
+    color: var(--original-footer-bg) !important;
+    width: 100%;
+    display: block;
+    text-align: center;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    padding: 15px 12px;
+    font-size: 14px;
+    border-radius: 6px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    box-shadow: 0 4px 14px rgba(255, 204, 0, 0.2);
+    transition: background-color 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease;
+}
+
+    .btn-checkout-large:hover {
+        background-color: #ffffff !important;
+        box-shadow: 0 6px 20px rgba(255, 255, 255, 0.15);
+    }
+
+    .btn-checkout-large:active {
+        transform: scale(0.98);
+    }

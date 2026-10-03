@@ -1,0 +1,270 @@
+﻿/* ==========================================================================
+   Show's Garage - Core Registration View Engine (Unified Adaptive Variables)
+   ========================================================================== */
+
+.auth-theme-wrapper {
+    width: 100%;
+    min-height: 100vh; /* Changed from dynamic subtract functions to let layout breathe naturally */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 60px 15px; /* Increased vertical space away from screen viewport edge */
+    box-sizing: border-box;
+}
+
+.auth-centered-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+/* Card Body Substrate Panel Workspace */
+.auth-card-width {
+    width: 100%;
+    max-width: 480px; /* Slightly increased layout width boundary map */
+    background-color: var(--card-bg) !important;
+    padding: 45px 35px; /* Increased internal cell padding to eliminate claustrophobia */
+    border: 1px solid rgba(0, 0, 0, 0.06) !important;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+    box-sizing: border-box;
+    transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+[data-theme="dark"] .auth-card-width {
+    background-color: var(--card-bg) !important;
+    border-color: rgba(255, 255, 255, 0.04) !important;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+}
+
+/* Header Text Typography Correction Blocks */
+.auth-header-block {
+    text-align: center;
+    margin-bottom: 35px; /* Enhanced baseline space gap */
+    background: transparent !important; /* Stripped away fixed layout dark masking blocks */
+    padding: 0 !important;
+}
+
+.auth-main-heading {
+    color: var(--text-main) !important; /* Injected dynamic theme token variables */
+    font-family: 'Montserrat', sans-serif;
+    font-size: 26px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin: 0 0 10px 0;
+}
+
+.auth-subtitle-text {
+    color: var(--text-muted) !important; /* Forces soft readable gray instead of blending with dark masks */
+    font-size: 14.5px;
+    margin: 0;
+    line-height: 1.5;
+}
+
+/* Fields & Stacking Structural Input Elements Matrix */
+.input-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 22px;
+    width: 100%;
+    text-align: left;
+}
+
+    .input-group label {
+        color: var(--text-main);
+        font-family: 'Montserrat', sans-serif;
+        font-size: 11px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 8px;
+    }
+
+.auth-input {
+    width: 100%;
+    background-color: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    color: #1a1a1a;
+    padding: 14px;
+    font-size: 14px;
+    font-family: 'Inter', sans-serif;
+    border-radius: 8px;
+    box-sizing: border-box;
+    transition: border-color 0.2s, background-color 0.2s, color 0.2s;
+}
+
+[data-theme="dark"] .auth-input {
+    background-color: rgba(0, 0, 0, 0.2);
+    border-color: rgba(255, 255, 255, 0.08);
+    color: #ffffff;
+}
+
+.auth-input:focus:not(:disabled) {
+    border-color: #e50914;
+    background-color: #ffffff;
+    outline: none;
+}
+
+[data-theme="dark"] .auth-input:focus:not(:disabled) {
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+.auth-input:disabled {
+    background-color: rgba(0, 0, 0, 0.02) !important;
+    color: var(--text-muted) !important;
+    opacity: 0.65;
+    border-color: rgba(0, 0, 0, 0.05) !important;
+    cursor: not-allowed;
+}
+
+[data-theme="dark"] .auth-input:disabled {
+    background-color: rgba(255, 255, 255, 0.01) !important;
+    border-color: rgba(255, 255, 255, 0.02) !important;
+}
+
+/* Horizontal Row Inline Split For OTP Generator Layouts */
+.auth-inline-input-row {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    width: 100%;
+}
+
+.auth-flex-input {
+    flex: 1.8 !important;
+}
+
+.btn-inline-action {
+    途径: 1 !important;
+    background-color: var(--header-bg);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    color: var(--brand-cream);
+    padding: 15px 0;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.02);
+    transition: background-color 0.2s, color 0.2s;
+}
+
+[data-theme="dark"] .btn-inline-action {
+    color: var(--text-main);
+    border-color: rgba(255, 255, 255, 0.03);
+}
+
+.btn-inline-action:hover:not(:disabled) {
+    background-color: #e50914 !important;
+    color: #ffffff !important;
+    border-color: #e50914 !important;
+}
+
+/* Resend Verification Dispatch Link Tokens Trigger */
+.auth-resend-link-box {
+    margin-top: 8px;
+    text-align: right;
+}
+
+.auth-resend-btn {
+    color: var(--text-muted);
+    font-size: 12.5px;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+    .auth-resend-btn:hover {
+        color: #e50914;
+        text-decoration: underline;
+    }
+
+/* Main Transaction Submit Execution Controller Trigger Button */
+.auth-primary-submit-btn {
+    width: 100%;
+    background-color: var(--brand-racing-yellow);
+    color: var(--original-footer-bg);
+    border: none;
+    padding: 16px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 15px;
+    box-sizing: border-box;
+    box-shadow: 0 4px 14px rgba(255, 204, 0, 0.2);
+    transition: all 0.2s ease;
+}
+
+    .auth-primary-submit-btn:hover:not(.aspNetDisabled) {
+        background-color: #ffffff;
+        color: var(--original-footer-bg);
+        box-shadow: 0 6px 20px rgba(255, 255, 255, 0.15);
+    }
+
+    .auth-primary-submit-btn:active:not(.aspNetDisabled) {
+        transform: scale(0.99);
+    }
+
+    .auth-primary-submit-btn.aspNetDisabled {
+        background-color: rgba(0, 0, 0, 0.05) !important;
+        color: var(--text-muted) !important;
+        cursor: not-allowed !important;
+        opacity: 0.5;
+        transform: none !important;
+        box-shadow: none !important;
+        border: 1px solid rgba(0, 0, 0, 0.04) !important;
+    }
+
+[data-theme="dark"] .auth-primary-submit-btn.aspNetDisabled {
+    background-color: rgba(255, 255, 255, 0.02) !important;
+    border-color: rgba(255, 255, 255, 0.02) !important;
+}
+
+/* Routing Logs & Status Alerts Layout Boxes */
+.auth-footer-routing-box {
+    text-align: center;
+    margin-top: 30px; /* Enhanced clearance spacing framework */
+    background: transparent !important; /* Cleared old black bottom box blocks */
+    padding: 0 !important;
+}
+
+.auth-footer-text {
+    color: var(--text-muted) !important; /* Fixed dark tracking blur text on light themes */
+    font-size: 14px;
+    margin-bottom: 15px;
+}
+
+.auth-redirect-link {
+    color: var(--text-main) !important;
+    text-decoration: none;
+    font-weight: 700;
+    border-bottom: 1px solid transparent;
+    transition: color 0.2s, border-color 0.2s;
+}
+
+    .auth-redirect-link:hover {
+        color: #e50914 !important;
+        border-bottom-color: #e50914 !important;
+    }
+
+.auth-system-alert-text {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    margin-top: 15px;
+    line-height: 1.5;
+}
+
+.auth-error-message {
+    color: #ef4444;
+    font-size: 12px;
+    margin-top: 5px;
+    font-weight: 600;
+    display: block;
+}

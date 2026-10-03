@@ -1,0 +1,105 @@
+@{
+    ViewBag.Title = "Checkout | Show's Garage";
+    var cartItems   = ViewBag.CartItems as List<Ecommerce_Website_MVC.Models.CartItemModel>;
+    decimal subtotal = cartItems != null ? cartItems.Sum(i => i.LineTotal) : 0;
+    decimal shipping = (decimal)(ViewBag.ShippingFee ?? 0m);
+}
+@section styles {
+    <link rel="stylesheet" href="~/Assets/css/checkout.css" />
+}
+
+<div style="max-width:1100px;margin:0 auto;padding:20px 15px;">
+    <h1 class="page-header">Checkout</h1>
+
+    @if (ViewBag.Error != null && !string.IsNullOrEmpty(ViewBag.Error.ToString()))
+    {
+        <div style="background:#e50914;color:#fff;padding:12px 20px;border-radius:6px;margin-bottom:20px;">@ViewBag.Error</div>
+    }
+
+    @using (Html.BeginForm("Checkout", "Cart", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:30px;align-items:start;">
+            <!-- Shipping Form -->
+            <div style="background:var(--card-bg);border:1px solid rgba(0,0,0,0.05);border-radius:12px;padding:30px;box-shadow:0 4px 14px rgba(0,0,0,0.02);">
+                <h3 style="font-family:'Montserrat',sans-serif;font-size:18px;margin:0 0 25px;text-transform:uppercase;color:var(--text-main);">Delivery Details</h3>
+                <div class="input-group">
+                    <label>Full Name *</label>
+                    <input type="text" name="fullName" class="auth-input" required />
+                </div>
+                <div class="input-group">
+                    <label>Phone Number *</label>
+                    <input type="tel" name="phone" class="auth-input" required />
+                </div>
+                <div class="input-group">
+                    <label>Shipping Address *</label>
+                    <textarea name="address" class="auth-input" rows="3" required></textarea>
+                </div>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:15px;">
+                    <div class="input-group">
+                        <label>City *</label>
+                        <input type="text" name="city" class="auth-input" required id="cityInput" oninput="checkCOD()" />
+                    </div>
+                    <div class="input-group">
+                        <label>Pincode *</label>
+                        <input type="text" name="pincode" class="auth-input" maxlength="6" required />
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label>Payment Mode *</label>
+                    <select name="paymentMode" class="auth-input" id="paymentModeSelect" onchange="checkCOD()">
+                        <option value="Online">Online (UPI / Bank Transfer)</option>
+                        <option value="COD">Cash on Delivery</option>
+                    </select>
+                    <small id="codNote" style="color:#e50914;display:none;margin-top:5px;">Note: COD is only available for Surat city.</small>
+                </div>
+                <button type="submit" class="buy-btn" style="width:100%;padding:14px;margin-top:10px;font-size:15px;">CONTINUE TO PAYMENT &rarr;</button>
+            </div>
+
+            <!-- Order Review -->
+            <div style="background:var(--card-bg);border:1px solid rgba(0,0,0,0.05);border-radius:12px;padding:30px;box-shadow:0 4px 14px rgba(0,0,0,0.02);">
+                <h3 style="font-family:'Montserrat',sans-serif;font-size:18px;margin:0 0 25px;text-transform:uppercase;color:var(--text-main);">Order Review</h3>
+                @if (cartItems != null)
+                {
+                    foreach (var item in cartItems)
+                    {
+                        <div style="display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid rgba(0,0,0,0.05);font-size:14px;color:var(--text-main);">
+                            <span>@item.BrandName - @item.Title (x@item.Quantity)</span>
+                            <strong>Rs. @item.LineTotal.ToString("N0")</strong>
+                        </div>
+                    }
+                }
+                <hr style="opacity:.15;margin:20px 0;" />
+                <div style="display:flex;justify-content:space-between;margin-bottom:10px;color:var(--text-main);">
+                    <span>Subtotal</span>
+                    <span>Rs. @subtotal.ToString("N0")</span>
+                </div>
+                <div style="display:flex;justify-content:space-between;margin-bottom:15px;color:var(--text-muted);font-size:14px;">
+                    <span>Shipping</span>
+                    <span id="shippingDisplay">Rs. @shipping.ToString("N0")</span>
+                </div>
+                <hr style="opacity:.15;margin:15px 0;" />
+                <div style="display:flex;justify-content:space-between;font-size:18px;color:var(--text-main);">
+                    <strong>Total</strong>
+                    <strong style="color:#e50914;" id="totalDisplay">Rs. @((subtotal + shipping).ToString("N0"))</strong>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@section scripts {
+    <script type="text/javascript">
+        var subtotal = @subtotal;
+        var shipping = @shipping;
+        function checkCOD() {
+            var city    = document.getElementById('cityInput').value.trim().toLowerCase();
+            var method  = document.getElementById('paymentModeSelect').value;
+            var codNote = document.getElementById('codNote');
+            codNote.style.display = (method === 'COD' && city !== 'surat') ? 'block' : 'none';
+            var shippingAmt = (method === 'COD') ? 0 : shipping;
+            document.getElementById('shippingDisplay').innerText = 'Rs. ' + shippingAmt.toLocaleString('en-IN');
+            document.getElementById('totalDisplay').innerText    = 'Rs. ' + (subtotal + shippingAmt).toLocaleString('en-IN');
+        }
+    </script>
+}

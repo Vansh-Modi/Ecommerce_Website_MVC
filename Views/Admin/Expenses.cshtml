@@ -1,0 +1,106 @@
+﻿@model List<Ecommerce_Website_MVC.Models.ExpenseModel>
+@{
+    ViewBag.Title = "Expenses | Admin";
+    decimal totalEx = Model.Sum(e => e.Amount);
+}
+
+@if (TempData["Success"] != null) { <div style="background:#28a745;color:#fff;padding:12px 20px;border-radius:6px;margin-bottom:20px;">@TempData["Success"]</div> }
+
+<div style="display:flex;gap:20px;flex-wrap:wrap;align-items:flex-start;">
+
+    <!-- Expense Form -->
+    <div class="content-card" style="flex:1;min-width:280px;" id="expFormSection">
+        <h3 id="expFormTitle" style="margin-bottom:20px;">Add Expense</h3>
+        @using (Html.BeginForm("SaveExpense","Admin",FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            <input type="hidden" name="expenseId" id="editExpId" value="" />
+            <div class="input-group"><label>Title *</label><input type="text"   name="title"       id="eExpTitle"  class="auth-input" required /></div>
+            <div class="input-group">
+                <label>Type *</label>
+                <select name="expenseType" id="eExpType" class="auth-input" required>
+                    @foreach (var t in new[] { "Product Purchase","Shipping Cost","Marketing","Damaged Return","Platform Fee","Other" })
+                    {
+                        <option value="@t">@t</option>
+                    }
+                </select>
+            </div>
+            <div class="input-group"><label>Amount *</label><input type="number" name="amount"     id="eExpAmt"    class="auth-input" step="0.01" required /></div>
+            <div class="input-group"><label>Date *</label><input type="date"   name="expenseDate" id="eExpDate"   class="auth-input" value="@DateTime.Now.ToString("yyyy-MM-dd")" required /></div>
+            <div class="input-group"><label>Remarks</label><textarea name="remarks" id="eExpRemarks" class="auth-input" rows="2"></textarea></div>
+            <button type="submit" class="buy-btn" style="padding:11px 25px;">Save</button>
+            <button type="button" onclick="clearExpForm()" style="margin-left:10px;padding:11px 20px;border:1px solid rgba(0,0,0,.15);border-radius:6px;background:transparent;cursor:pointer;">Clear</button>
+        }
+    </div>
+
+    <!-- Expense Table -->
+    <div style="flex:2;min-width:320px;">
+        <div style="background:#e50914;color:#fff;border-radius:8px;padding:18px 25px;margin-bottom:20px;">
+            <p style="font-size:12px;opacity:.85;margin:0 0 4px;">Total Expenses</p>
+            <h2 style="font-size:30px;margin:0;font-family:'Montserrat',sans-serif;">â‚¹@totalEx.ToString("N2")</h2>
+        </div>
+        <div class="content-card" style="overflow-x:auto;">
+            <table style="width:100%;border-collapse:collapse;font-size:13px;">
+                <thead>
+                    <tr style="background:rgba(0,0,0,.04);">
+                        <th style="padding:10px;text-align:left;">Title</th>
+                        <th style="padding:10px;">Type</th>
+                        <th style="padding:10px;">Amount</th>
+                        <th style="padding:10px;">Date</th>
+                        <th style="padding:10px;">Remarks</th>
+                        <th style="padding:10px;">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var e in Model)
+                    {
+                        <tr style="border-bottom:1px solid rgba(0,0,0,.06);">
+                            <td style="padding:9px;">@e.Title</td>
+                            <td style="text-align:center;padding:9px;font-size:12px;">@e.ExpenseType</td>
+                            <td style="text-align:center;padding:9px;">â‚¹@e.Amount.ToString("N2")</td>
+                            <td style="text-align:center;padding:9px;">@e.ExpenseDate.ToString("dd MMM yyyy")</td>
+                            <td style="padding:9px;font-size:12px;color:var(--text-muted);">@e.Remarks</td>
+                            <td style="text-align:center;padding:9px;">
+                                <button type="button"
+                                        onclick="editExp(@e.ExpenseId,'@Html.Raw(e.Title.Replace("'","\\'"))','@e.ExpenseType','@e.Amount','@e.ExpenseDate.ToString("yyyy-MM-dd")','@Html.Raw((e.Remarks != null ? e.Remarks.Replace("'","\\'"))')"
+                                        class="buy-btn" style="padding:4px 10px;font-size:11px;">Edit</button>
+                                @using (Html.BeginForm("DeleteExpense","Admin",FormMethod.Post,new{style="display:inline"}))
+                                {
+                                    @Html.AntiForgeryToken()
+                                    <input type="hidden" name="expenseId" value="@e.ExpenseId" />
+                                    <button type="submit" class="buy-btn" style="background:#e50914;padding:4px 10px;font-size:11px;" onclick="return confirm('Delete?')">Del</button>
+                                }
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script type="text/javascript">
+        function editExp(id,title,type,amount,date,remarks){
+            document.getElementById('expFormTitle').textContent = 'Edit Expense';
+            document.getElementById('editExpId').value    = id;
+            document.getElementById('eExpTitle').value    = title;
+            document.getElementById('eExpType').value     = type;
+            document.getElementById('eExpAmt').value      = amount;
+            document.getElementById('eExpDate').value     = date;
+            document.getElementById('eExpRemarks').value  = remarks;
+            document.getElementById('expFormSection').scrollIntoView({behavior:'smooth'});
+        }
+        function clearExpForm(){
+            document.getElementById('expFormTitle').textContent = 'Add Expense';
+            document.getElementById('editExpId').value = '';
+            document.querySelectorAll('#expFormSection input:not([type=hidden]),#expFormSection textarea').forEach(function(el){el.value='';});
+        }
+    </script>
+}
+
+
+
+
+
+

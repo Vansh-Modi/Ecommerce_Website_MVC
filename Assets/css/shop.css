@@ -1,0 +1,293 @@
+﻿/* ==========================================================================
+   Show's Garage - Premium Corporate Storefront Catalog (Shop Engine Layout)
+   ========================================================================== */
+
+.shop-theme-wrapper {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.shop-content-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 10px 15px 40px 15px;
+    box-sizing: border-box;
+}
+
+/* 1. Header Controls Section Branding Bar */
+.shop-controls-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 25px;
+    border-bottom: 2px solid var(--text-main);
+    padding-bottom: 15px;
+    transition: border-color 0.3s ease;
+}
+
+.shop-main-heading {
+    color: var(--text-main);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 24px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin: 0;
+    transition: color 0.3s ease;
+}
+
+/* ==========================================================================
+   2. Horizontal Category Navigation Scroll UI Component Controls
+   ========================================================================== */
+.final-scroll-box {
+    width: 100%;
+    display: block;
+    overflow-x: auto;
+    overflow-y: hidden;
+    margin-bottom: 35px;
+    padding-bottom: 12px;
+    -webkit-overflow-scrolling: touch;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+    .final-scroll-box::-webkit-scrollbar {
+        display: none !important;
+        height: 0 !important;
+        width: 0 !important;
+    }
+
+.final-scroll-content {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 12px;
+    width: max-content;
+    padding: 2px;
+}
+
+/* Base Filter Pills System Layout Definitions */
+.btn-filter-pill-isolated {
+    flex-shrink: 0;
+    white-space: nowrap;
+    display: inline-block;
+    background-color: var(--card-bg) !important;
+    border: 1px solid rgba(0, 0, 0, 0.08) !important;
+    color: var(--text-muted) !important;
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    padding: 8px 18px;
+    border-radius: 20px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+[data-theme="dark"] .btn-filter-pill-isolated {
+    border-color: rgba(255, 255, 255, 0.04) !important;
+}
+
+.btn-filter-pill-isolated:hover {
+    color: var(--text-main) !important;
+    border-color: #e50914 !important; /* Highlights red tracking lines on element hover */
+    background-color: var(--header-bg) !important;
+}
+
+/* High-contrast Active Selector State Engine */
+.btn-filter-pill-isolated.active-pill-isolated {
+    background-color: #e50914 !important; /* Injects rich racing red onto selected target pill */
+    border-color: #e50914 !important;
+    color: #ffffff !important;
+    font-weight: 700;
+    box-shadow: 0 4px 12px rgba(229, 9, 20, 0.2);
+}
+
+/* ==========================================================================
+   3. Core Structural Products Presentation Matrix Grid
+   ========================================================================== */
+.products-gallery-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 25px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+@media (min-width: 576px) {
+    .products-gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 992px) {
+    .products-gallery-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (min-width: 1200px) {
+    .products-gallery-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+/* ==========================================================================
+   4. Modular Interactive Product Listing Cards Setup
+   ========================================================================== */
+.product-gallery-card {
+    background-color: var(--card-bg);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    border-radius: 12px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    box-sizing: border-box;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.03);
+    transition: transform 0.25s ease, border-color 0.25s ease, background-color 0.3s ease;
+}
+
+[data-theme="dark"] .product-gallery-card {
+    border-color: rgba(255, 255, 255, 0.04);
+}
+
+.product-gallery-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(0, 0, 0, 0.15);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.06);
+}
+
+[data-theme="dark"] .product-gallery-card:hover {
+    border-color: rgba(255, 255, 255, 0.12);
+}
+
+.card-clickable-area {
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.product-image-frame {
+    width: 100%;
+    height: 240px;
+    background-color: rgba(0, 0, 0, 0.02);
+    overflow: hidden;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+}
+
+.product-gallery-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease;
+}
+
+.product-gallery-card:hover .product-gallery-img {
+    transform: scale(1.03);
+}
+
+.product-details-block {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+    .product-details-block h3 {
+        color: var(--text-muted);
+        font-size: 11px;
+        text-transform: uppercase;
+        font-weight: 700;
+        letter-spacing: 0.8px;
+        margin: 0 0 6px 0;
+    }
+
+.product-subtitle-text {
+    color: var(--text-main);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 1.4;
+    margin: 0 0 15px 0;
+    flex-grow: 1;
+}
+
+.product-price-tag {
+    color: var(--text-main);
+    font-family: 'Inter', sans-serif;
+    font-size: 17px;
+    font-weight: 700;
+}
+
+/* 5. Bottom Actions Block Controls */
+.card-action-block {
+    padding: 0 20px 20px 20px;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.btn.btn-add-to-cart {
+    display: block !important;
+    width: 100% !important;
+    background-color: var(--header-bg) !important;
+    border: 1px solid rgba(0, 0, 0, 0.05) !important;
+    color: var(--brand-cream) !important;
+    text-align: center;
+    padding: 11px 0 !important;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12px !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px;
+    border-radius: 6px !important;
+    text-decoration: none;
+    cursor: pointer;
+    box-sizing: border-box;
+    transition: all 0.2s ease;
+}
+
+[data-theme="dark"] .btn.btn-add-to-cart {
+    color: var(--text-main) !important;
+}
+
+.btn.btn-add-to-cart:hover {
+    background-color: #e50914 !important;
+    border-color: #e50914 !important;
+    color: #ffffff !important;
+    box-shadow: 0 4px 12px rgba(229, 9, 20, 0.2);
+}
+
+/* Out of Stock Styling Exceptions Boundary Controls */
+.product-gallery-card.sold-out {
+    opacity: 0.65;
+}
+
+.btn-sold-out {
+    background-color: rgba(0, 0, 0, 0.08) !important;
+    color: var(--text-muted) !important;
+    border: 1px solid rgba(0, 0, 0, 0.05) !important;
+    cursor: not-allowed !important;
+    pointer-events: none;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 11px;
+    letter-spacing: 0.5px;
+    display: block;
+    width: 100%;
+    text-align: center;
+    padding: 11px 0;
+    border-radius: 6px;
+    box-sizing: border-box;
+}
+
+[data-theme="dark"] .btn-sold-out {
+    background-color: rgba(255, 255, 255, 0.04) !important;
+}

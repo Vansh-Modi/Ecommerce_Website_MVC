@@ -1,0 +1,110 @@
+@{
+    ViewBag.Title = "Payment | Show's Garage";
+    string method   = ViewBag.PaymentMethod != null ? ViewBag.PaymentMethod.ToString() : "Online";
+    decimal subtotal= (decimal)(ViewBag.Subtotal ?? 0m);
+    decimal shipping= (decimal)(ViewBag.ShippingFee ?? 0m);
+    decimal total   = (decimal)(ViewBag.TotalDue ?? 0m);
+    var cartItems   = ViewBag.CartItems as List<Ecommerce_Website_MVC.Models.CartItemModel>;
+}
+@section styles {
+    <link rel="stylesheet" href="~/Assets/css/payment.css" />
+}
+
+<div style="max-width:1100px;margin:0 auto;padding:20px 15px;">
+    <h1 class="page-header">Payment</h1>
+
+    @if (ViewBag.Error != null && !string.IsNullOrEmpty(ViewBag.Error.ToString()))
+    {
+        <div style="background:#e50914;color:#fff;padding:12px 20px;border-radius:6px;margin-bottom:20px;">@ViewBag.Error</div>
+    }
+
+    @using (Html.BeginForm("SubmitPayment", "Cart", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:30px;align-items:start;">
+            @if (method == "COD")
+            {
+                <div style="background:var(--card-bg);border:1px solid rgba(0,0,0,0.05);border-radius:12px;padding:30px;box-shadow:0 4px 14px rgba(0,0,0,0.02);">
+                    <h3 style="font-family:'Montserrat',sans-serif;font-size:18px;margin:0 0 15px;text-transform:uppercase;color:var(--text-main);">Cash on Delivery</h3>
+                    <p style="color:var(--text-muted);font-size:14px;line-height:1.6;margin-bottom:20px;">
+                        Your order will be delivered to your shipping address. Please keep the exact cash amount ready upon delivery.
+                    </p>
+                    <div style="background:rgba(229,9,20,0.08);border-left:4px solid #e50914;padding:15px;border-radius:6px;display:flex;justify-content:space-between;align-items:center;">
+                        <span style="font-size:14px;color:var(--text-main);font-weight:600;">Payable at Delivery:</span>
+                        <strong style="font-size:22px;color:#e50914;">Rs. @total.ToString("N0")</strong>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div style="background:var(--card-bg);border:1px solid rgba(0,0,0,0.05);border-radius:12px;padding:30px;box-shadow:0 4px 14px rgba(0,0,0,0.02);">
+                    <h3 style="font-family:'Montserrat',sans-serif;font-size:18px;margin:0 0 15px;text-transform:uppercase;color:var(--text-main);">Online Payment</h3>
+                    
+                    @if (ViewBag.UpiId != null && !string.IsNullOrEmpty(ViewBag.UpiId.ToString()))
+                    {
+                        <p style="font-size:15px;color:var(--text-main);margin-bottom:15px;"><strong>UPI ID:</strong> <span style="color:#e50914;font-weight:700;">@ViewBag.UpiId</span></p>
+                    }
+                    @if (ViewBag.QrCodePath != null && !string.IsNullOrEmpty(ViewBag.QrCodePath.ToString()))
+                    {
+                        <div style="margin:15px 0;text-align:center;">
+                            <img src="@Url.Content(ViewBag.QrCodePath.ToString())" alt="Payment QR Code" style="max-width:180px;border-radius:8px;border:1px solid rgba(0,0,0,0.1);padding:5px;background:#fff;" />
+                        </div>
+                    }
+                    @if (ViewBag.BankDetails != null && !string.IsNullOrEmpty(ViewBag.BankDetails.ToString()))
+                    {
+                        <div style="background:rgba(0,0,0,0.04);padding:14px;border-radius:6px;white-space:pre-wrap;font-size:13px;margin-bottom:20px;color:var(--text-main);">
+                            @ViewBag.BankDetails
+                        </div>
+                    }
+
+                    <div style="background:rgba(0,0,0,0.04);padding:15px;border-radius:8px;display:flex;justify-content:space-between;align-items:center;margin-bottom:25px;">
+                        <span style="font-size:14px;color:var(--text-main);font-weight:600;">Amount to Transfer:</span>
+                        <strong style="font-size:22px;color:#e50914;">Rs. @total.ToString("N0")</strong>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Transaction Reference / UTR *</label>
+                        <input type="text" name="txnRef" class="auth-input" placeholder="Enter your transaction ID or UTR number" required />
+                    </div>
+                    <div class="input-group">
+                        <label>Payment Screenshot * (JPG/PNG)</label>
+                        <input type="file" name="screenshot" accept=".jpg,.jpeg,.png" class="auth-input" style="padding:10px;" required />
+                    </div>
+                </div>
+            }
+
+            <!-- Order Summary Column -->
+            <div style="background:var(--card-bg);border:1px solid rgba(0,0,0,0.05);border-radius:12px;padding:30px;box-shadow:0 4px 14px rgba(0,0,0,0.02);">
+                <h3 style="font-family:'Montserrat',sans-serif;font-size:18px;margin:0 0 20px;text-transform:uppercase;color:var(--text-main);">Order Summary</h3>
+                @if (cartItems != null)
+                {
+                    foreach (var item in cartItems)
+                    {
+                        <div style="display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid rgba(0,0,0,0.05);font-size:14px;color:var(--text-main);">
+                            <span>@item.BrandName - @item.Title (x@item.Quantity)</span>
+                            <strong>Rs. @item.LineTotal.ToString("N0")</strong>
+                        </div>
+                    }
+                }
+                <hr style="opacity:.15;margin:20px 0;" />
+                <div style="display:flex;justify-content:space-between;margin-bottom:10px;color:var(--text-main);">
+                    <span>Subtotal</span>
+                    <span>Rs. @subtotal.ToString("N0")</span>
+                </div>
+                <div style="display:flex;justify-content:space-between;margin-bottom:15px;color:var(--text-muted);font-size:14px;">
+                    <span>Shipping</span>
+                    <span>Rs. @shipping.ToString("N0")</span>
+                </div>
+                <hr style="opacity:.15;margin:15px 0;" />
+                <div style="display:flex;justify-content:space-between;margin-bottom:25px;font-size:18px;color:var(--text-main);">
+                    <strong>Total</strong>
+                    <strong style="color:#e50914;">Rs. @total.ToString("N0")</strong>
+                </div>
+                <button type="submit" class="buy-btn" style="display:block;width:100%;text-align:center;padding:15px;font-size:15px;">
+                    PLACE ORDER
+                </button>
+            </div>
+        </div>
+    }
+</div>

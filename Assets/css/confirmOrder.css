@@ -1,0 +1,194 @@
+﻿/* ==========================================================================
+   Show's Garage - Dedicated Order Success Style Framework (Dynamic Architecture)
+   ========================================================================== */
+
+.shop-theme-wrapper {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.success-layout-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 15px;
+}
+
+.shop-content-container {
+    width: 100%;
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+
+.success-narrow-container {
+    max-width: 600px;
+}
+
+/* Core Box Card Container Structure */
+.success-card {
+    background-color: var(--card-bg);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    border-radius: 12px;
+    padding: 40px 20px;
+    box-sizing: border-box;
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+    transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+[data-theme="dark"] .success-card {
+    border-color: rgba(255, 255, 255, 0.04);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+}
+
+@media (min-width: 768px) {
+    .success-card {
+        padding: 50px 40px;
+    }
+}
+
+/* Checkmark Graphic Ring Element */
+.success-checkmark-ring {
+    width: 70px;
+    height: 70px;
+    background-color: rgba(46, 189, 89, 0.1);
+    border: 2px solid #2ebd59;
+    color: #2ebd59;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 25px;
+    user-select: none;
+}
+
+/* Headings and Core Label Elements */
+.success-main-heading {
+    color: var(--text-main);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 26px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin: 0 0 12px 0;
+    text-align: center;
+    transition: color 0.3s ease;
+}
+
+.success-meta-text {
+    color: var(--text-muted);
+    font-size: 14.5px;
+    margin: 0 0 25px 0;
+    line-height: 1.5;
+    transition: color 0.3s ease;
+}
+
+.success-order-id {
+    color: #e50914; /* Swapped out deep blue parameters for active racing highlight red tokens */
+    font-size: 16px;
+    display: block;
+    margin-top: 6px;
+    font-family: 'Inter', monospace;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+/* Informational Pipeline Content Panel */
+.success-info-panel {
+    background-color: rgba(0, 0, 0, 0.015);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    border-left: 4px solid var(--text-main);
+    padding: 24px;
+    border-radius: 6px;
+    text-align: left;
+    box-sizing: border-box;
+    margin-bottom: 30px;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+[data-theme="dark"] .success-info-panel {
+    background-color: rgba(255, 255, 255, 0.01);
+    border-color: rgba(255, 255, 255, 0.03);
+}
+
+.info-panel-title {
+    color: var(--text-main);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin: 0 0 14px 0;
+    letter-spacing: 0.5px;
+}
+
+.info-panel-list {
+    color: var(--text-muted);
+    font-size: 13.5px;
+    margin: 0;
+    padding-left: 18px;
+    line-height: 1.6;
+}
+
+    .info-panel-list li {
+        margin-bottom: 10px;
+    }
+
+        .info-panel-list li:last-child {
+            margin-bottom: 0;
+        }
+
+/* Context Helpers Utility Text Parameters */
+.text-green {
+    color: #2ebd59;
+    font-weight: 700;
+}
+
+.success-disclaimer {
+    color: var(--text-muted);
+    opacity: 0.7;
+    font-size: 12px;
+    line-height: 1.5;
+    margin-bottom: 25px;
+}
+
+/* Call to Action Navigation Button Structure */
+.success-actions-block {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.btn-success-home {
+    background-color: var(--brand-racing-yellow) !important;
+    color: var(--original-footer-bg) !important;
+    width: 100%;
+    display: block;
+    border: none;
+    outline: none;
+    text-align: center;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    padding: 15px;
+    font-size: 14px;
+    border-radius: 6px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    text-decoration: none;
+    box-shadow: 0 4px 14px rgba(255, 204, 0, 0.2);
+    transition: background-color 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease;
+    box-sizing: border-box;
+}
+
+    .btn-success-home:hover {
+        background-color: #ffffff !important;
+        box-shadow: 0 6px 20px rgba(255, 255, 255, 0.15);
+    }
+
+    .btn-success-home:active {
+        transform: scale(0.98);
+    }

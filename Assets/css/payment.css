@@ -1,0 +1,231 @@
+﻿/* ==========================================================================
+   Show's Garage - Checkout & Payment Layer (Adapted for Site.Master)
+   ========================================================================== */
+
+/* Spacing layout wrapper to constrain width neatly over the Master Page teal */
+.payment-upload-layout {
+    max-width: 600px !important;
+    margin: 0 auto !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+}
+
+/* Base Panel Box Styling Cards - Clean White Card Content to Match Site Layout */
+.checkout-form-card {
+    background-color: #ffffff !important; /* Matches Master content-card profile */
+    border-radius: 8px !important;
+    padding: 30px !important;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2) !important;
+    color: #333333 !important; /* Clean reading contrast */
+    box-sizing: border-box !important;
+    width: 100% !important;
+    overflow: hidden !important;
+}
+
+/* Header Spacing Utilities */
+.shop-controls-bar {
+    border-bottom: 2px solid rgba(0, 0, 0, 0.08) !important;
+    padding-bottom: 12px !important;
+    margin-bottom: 25px !important;
+}
+
+.shop-main-heading {
+    font-size: 22px !important;
+    font-weight: 800 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
+    margin: 0 !important;
+    color: #005461 !important; /* Dynamic contrast match */
+}
+
+/* Core Form Formatting Stack */
+.form-grid {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 16px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+}
+
+.form-group {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 6px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+}
+
+.form-label {
+    color: #555555 !important;
+    font-size: 11px !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
+    text-align: left !important;
+}
+
+/* Upgraded Input Field Parameters (Zero Overflowing Guaranteed) */
+.form-input {
+    background-color: #f9f9f9 !important;
+    border: 1px solid #cccccc !important;
+    border-radius: 6px !important;
+    color: #333333 !important;
+    padding: 12px 14px !important;
+    font-size: 14px !important;
+    font-family: inherit !important;
+    outline: none !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    transition: all 0.2s ease !important;
+}
+
+    .form-input:focus {
+        border-color: #005461 !important; /* Pulls active theme color from master */
+        background-color: #ffffff !important;
+        box-shadow: 0 0 0 3px rgba(0, 84, 97, 0.15) !important;
+    }
+
+/* Custom design rules for native file browser input selector fields */
+input[type="file"].form-input {
+    padding: 9px 12px !important;
+    cursor: pointer !important;
+}
+
+/* Notice Info Box */
+.checkout-info-banner {
+    background-color: rgba(212, 175, 55, 0.08) !important;
+    border-left: 4px solid #D4AF37 !important; /* Matches gold accents */
+    padding: 15px !important;
+    margin: 20px 0 !important;
+    border-radius: 4px !important;
+    text-align: left !important;
+}
+
+.info-banner-title {
+    color: #c29d23 !important;
+    font-size: 12px !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    display: block !important;
+    margin-bottom: 5px !important;
+}
+
+.info-banner-text {
+    color: #555555 !important;
+    font-size: 13px !important;
+    margin: 0 !important;
+    line-height: 1.5 !important;
+}
+
+/* Premium Dashboard UI Display Fields */
+.price-summary-container {
+    background: #fdfaf2 !important;
+    padding: 15px !important;
+    border-radius: 6px !important;
+    border: 1px dashed #D4AF37 !important;
+    margin-bottom: 20px !important;
+}
+
+.price-summary-label {
+    color: #777777 !important;
+    font-size: 13px !important;
+    display: block !important;
+}
+
+.price-summary-value {
+    font-size: 24px !important;
+    font-weight: 800 !important;
+    color: #005461 !important;
+}
+
+.section-description-text {
+    color: #666666 !important;
+    font-size: 14px !important;
+    margin-bottom: 20px !important;
+    line-height: 1.4 !important;
+}
+
+.bank-details-box {
+    background-color: #fdfdfd !important;
+    padding: 16px !important;
+    border-radius: 6px !important;
+    text-align: left !important;
+    border: 1px solid #eeeeee !important;
+    margin-bottom: 20px !important;
+}
+
+.bank-row-label {
+    color: #888888 !important;
+    font-size: 11px !important;
+    text-transform: uppercase !important;
+    display: block !important;
+    font-weight: 600 !important;
+}
+
+.bank-row-value.values-highlight {
+    font-size: 16px !important;
+    font-weight: 700 !important;
+    color: #005461 !important;
+    word-break: break-all !important;
+}
+
+.bank-monospace-text {
+    margin: 6px 0 0 0 !important;
+    color: #444444 !important;
+    font-size: 14px !important;
+    line-height: 1.5 !important;
+    white-space: pre-line !important;
+    font-family: monospace !important;
+    word-break: break-all !important;
+}
+
+/* Fully Unified Dynamic Action Complete Button */
+.btn-checkout-large {
+    background-color: #D4AF37 !important; /* Gold layout from Master Page properties */
+    color: #1a1a1a !important;
+    border: none !important;
+    border-radius: 4px !important;
+    padding: 15px 20px !important;
+    font-size: 14px !important;
+    font-weight: 700 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    cursor: pointer !important;
+    transition: background-color 0.2s ease !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
+    box-sizing: border-box !important;
+}
+
+    .btn-checkout-large:hover {
+        background-color: #FAEAB1 !important; /* Cream highlight layout link match */
+    }
+
+/* Image scaling settings for fluid mobile boxes */
+.checkout-form-card img,
+.checkout-form-card .payment-qr-img {
+    max-width: 180px !important;
+    width: 100% !important;
+    height: auto !important;
+    border: 1px solid #dddddd !important;
+    background-color: #ffffff !important;
+    padding: 6px !important;
+    border-radius: 6px !important;
+    margin: 0 auto 20px auto !important;
+    display: block !important;
+}
+
+/* ==========================================================================
+   📱 MOBILE STACKING COMPRESSION LOGIC
+   ========================================================================== */
+@media screen and (max-width: 768px) {
+    .checkout-form-card {
+        padding: 20px 15px !important;
+    }
+
+    .form-grid .form-input {
+        font-size: 16px !important; /* Absolute guard to stop mobile auto-zoom */
+        padding: 12px !important;
+    }
+}

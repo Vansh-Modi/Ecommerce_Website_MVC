@@ -1,0 +1,156 @@
+﻿/* ==========================================================================
+   Show's Garage - Administrative Accounts Control Dashboard CSS System
+   ========================================================================== */
+
+.users-table-responsive-wrapper {
+    width: 100% !important;
+    overflow-x: auto !important;
+    background-color: #141414;
+    border-radius: 8px;
+    border: 1px solid #222222;
+    -webkit-overflow-scrolling: touch;
+}
+
+.admin-users-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    text-align: left;
+    min-width: 900px; /* Assures readable cell proportions layout over micro screens */
+}
+
+    .admin-users-table th {
+        background-color: #1a1a1a;
+        color: #666666;
+        font-weight: 700;
+        text-transform: uppercase;
+        font-size: 11px;
+        letter-spacing: 0.5px;
+        padding: 15px 12px;
+        border-bottom: 2px solid #222222;
+    }
+
+    .admin-users-table td {
+        padding: 15px 12px;
+        border-bottom: 1px solid #1c1c1c;
+        vertical-align: middle;
+    }
+
+    .admin-users-table tbody tr:hover {
+        background-color: rgba(255, 255, 255, 0.01);
+    }
+
+/* User Text Layout Elements Classes */
+.usr-profile-name {
+    display: block;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.usr-meta-date {
+    display: block;
+    color: #555555;
+    font-size: 11px;
+    margin-top: 3px;
+}
+
+.usr-contact-line {
+    display: block;
+    color: #999999;
+    font-size: 13px;
+}
+
+    .usr-contact-line.email-highlight {
+        color: #aaaaaa;
+        font-weight: 500;
+    }
+
+/* Account Security Verification Status Elements Badges */
+.verify-badge {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+}
+
+    .verify-badge.state-active {
+        background-color: rgba(46, 189, 89, 0.08);
+        border: 1px solid rgba(46, 189, 89, 0.25);
+        color: #2ebd59;
+    }
+
+    .verify-badge.state-pending {
+        background-color: rgba(255, 193, 7, 0.08);
+        border: 1px solid rgba(255, 193, 7, 0.25);
+        color: #ffc107;
+    }
+
+/* Inline Selection Dropdown Badge Fixes */
+.usr-inline-dropdown {
+    background-color: #1c1c1c;
+    border: 1px solid #2d2d2d;
+    color: #ffffff;
+    padding: 6px 10px;
+    font-size: 12px;
+    border-radius: 4px;
+    outline: none;
+    font-weight: 600;
+    cursor: pointer;
+    width: 110px;
+}
+
+    .usr-inline-dropdown:focus {
+        border-color: #0076df;
+    }
+
+.select-arrow-badge {
+    appearance: none !important;
+    background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23888'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 8px center;
+    background-size: 14px;
+    padding-right: 24px !important;
+}
+
+/* Timestamp Activity Tracking Labels Nodes */
+.usr-meta-log {
+    display: block;
+    color: #444444;
+    font-size: 11px;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.usr-timestamp-value {
+    display: block;
+    color: #888888;
+    font-family: monospace;
+    font-size: 13px;
+    margin-top: 2px;
+}
+
+/* Interactive Execution Trigger Hooks Command Link */
+.usr-btn-link {
+    font-size: 12px;
+    font-weight: 700;
+    text-decoration: none;
+    cursor: pointer;
+    display: inline-block;
+    padding: 6px 12px;
+    background-color: rgba(0, 118, 223, 0.08);
+    border: 1px solid rgba(0, 118, 223, 0.2);
+    border-radius: 4px;
+    color: #0076df;
+    transition: all 0.15s ease;
+    text-transform: uppercase;
+}
+
+    .usr-btn-link:hover {
+        background-color: #0076df;
+        color: #ffffff;
+        border-color: #0076df;
+    }

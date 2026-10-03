@@ -1,0 +1,38 @@
+﻿@{
+    ViewBag.Title = "Verify OTP | Show's Garage";
+}
+@section styles {
+    <link rel="stylesheet" href="~/Assets/css/login.css" />
+}
+
+<div class="auth-wrapper">
+    <div class="auth-card">
+        <div class="auth-header">
+            <h2>Verify Your Email</h2>
+            <p>Enter the 6-digit code sent to your inbox</p>
+        </div>
+        @if (TempData["OtpSent"] != null)
+        {
+            <div style="color:#28a745;font-size:13px;text-align:center;margin-bottom:12px;">@TempData["OtpSent"]</div>
+        }
+        @using (Html.BeginForm("VerifyOtp", "Account", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            <div class="auth-form">
+                <div class="input-group">
+                    <label>6-Digit OTP Code</label>
+                    <input type="text" name="otp" class="auth-input" placeholder="Ex: 123456" maxlength="6" required />
+                </div>
+                <button type="submit" class="auth-btn">VERIFY &amp; CREATE ACCOUNT</button>
+                @if (ViewBag.Error != null && !string.IsNullOrEmpty(ViewBag.Error.ToString()))
+                {
+                    <div style="color:#e50914;font-size:13px;margin-top:10px;">@ViewBag.Error</div>
+                }
+                <div class="auth-footer">
+                    <p><a href="@Url.Action("Register", "Account")" style="color:#bbb;">Back to Registration</a></p>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+

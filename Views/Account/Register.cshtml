@@ -1,0 +1,48 @@
+﻿@{
+    ViewBag.Title = "Create Account | Show's Garage";
+}
+@section styles {
+    <link rel="stylesheet" href="~/Assets/css/login.css" />
+}
+
+<div class="auth-wrapper">
+    <div class="auth-card">
+        <div class="auth-header">
+            <h2>Create Account</h2>
+            <p>Join the garage community</p>
+        </div>
+
+        @using (Html.BeginForm("SendOtp", "Account", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            <div class="auth-form">
+                <div class="input-group">
+                    <label>Full Name</label>
+                    <input type="text" name="name" class="auth-input" placeholder="Your full name" required />
+                </div>
+                <div class="input-group">
+                    <label>Phone Number</label>
+                    <input type="tel" name="phone" class="auth-input" placeholder="10-digit phone number" required />
+                </div>
+                <div class="input-group">
+                    <label>Email Address</label>
+                    <input type="email" name="email" class="auth-input" placeholder="name@email.com" required />
+                </div>
+                <div class="input-group">
+                    <label>Password</label>
+                    <input type="password" name="password" class="auth-input" placeholder="â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢" required />
+                </div>
+                <button type="submit" class="auth-btn">SEND OTP &amp; VERIFY</button>
+
+                @if (ViewBag.Error != null && !string.IsNullOrEmpty(ViewBag.Error.ToString()))
+                {
+                    <div style="color:#e50914;font-size:13px;margin-top:10px;">@ViewBag.Error</div>
+                }
+                <div class="auth-footer">
+                    <p>Already have an account? <a href="@Url.Action("Login", "Account")">Sign In</a></p>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+

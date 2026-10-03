@@ -1,0 +1,668 @@
+﻿/* ==========================================================================
+   Show's Garage - Product Detail Presentation View Workspace Styling
+   ========================================================================== */
+
+.details-max-width {
+    max-width: 1200px !important;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.details-back-container {
+    margin-bottom: 25px;
+    padding: 0 15px;
+}
+
+@media (min-width: 768px) {
+    .details-back-container {
+        padding: 0;
+    }
+}
+
+.btn-layout-back {
+    color: var(--text-muted);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+    .btn-layout-back:hover {
+        color: #e50914;
+    }
+
+/* Core Multi-Column Structural Layout Grid Blocks Splitter */
+.product-details-layout-container {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    width: 100%;
+    padding: 0 15px;
+    box-sizing: border-box;
+}
+
+@media (min-width: 768px) {
+    .product-details-layout-container {
+        display: grid;
+        grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.4fr);
+        align-items: start;
+        gap: 40px;
+        padding: 0;
+    }
+}
+
+@media (min-width: 1024px) {
+    .product-details-layout-container {
+        gap: 55px;
+    }
+}
+
+/* Showcase Graphics Frame Panels */
+.main-showcase-image-frame {
+    width: 100%;
+    background-color: var(--card-bg);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    border-radius: 12px;
+    padding: 15px;
+    box-sizing: border-box;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.02);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+[data-theme="dark"] .main-showcase-image-frame {
+    border-color: rgba(255, 255, 255, 0.04);
+}
+
+@media (min-width: 480px) {
+    .main-showcase-image-frame {
+        padding: 20px;
+    }
+}
+
+.details-main-img {
+    width: 100%;
+    height: auto;
+    max-height: 320px;
+    object-fit: contain;
+    display: block;
+    border-radius: 8px;
+}
+
+@media (min-width: 480px) {
+    .details-main-img {
+        max-height: 400px;
+    }
+}
+
+@media (min-width: 768px) {
+    .details-main-img {
+        max-height: 440px;
+    }
+}
+
+/* Gallery Layout Thumbnails Component Grid */
+.gallery-thumbnails-container {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+    flex-wrap: wrap;
+}
+
+.thumbnail-wrapper {
+    width: 75px;
+    height: 75px;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: pointer;
+    background-color: var(--card-bg);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.01);
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+[data-theme="dark"] .thumbnail-wrapper {
+    border-color: rgba(255, 255, 255, 0.04);
+}
+
+.thumbnail-wrapper:hover,
+.thumbnail-wrapper.active-thumb {
+    border-color: #e50914 !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(229, 9, 20, 0.15);
+}
+
+.gallery-thumb-item {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Text & Data Column Blocks Typography Layout */
+.details-content-column {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+.details-brand-label {
+    color: var(--text-muted);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+}
+
+@media (min-width: 768px) {
+    .details-brand-label {
+        font-size: 13px;
+    }
+}
+
+.details-product-title {
+    color: var(--text-main);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 22px;
+    font-weight: 800;
+    margin: 0 0 15px 0;
+    line-height: 1.3;
+}
+
+@media (min-width: 480px) {
+    .details-product-title {
+        font-size: 26px;
+    }
+}
+
+@media (min-width: 768px) {
+    .details-product-title {
+        font-size: 30px;
+    }
+}
+
+/* Status badging indicator rows layout tags */
+.details-inventory-status-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+/* ==========================================================================
+   FIXED: Scale Ratio Adaptive Contrast Badge
+   ========================================================================== */
+.details-scale-badge {
+    background-color: rgba(0, 0, 0, 0.04);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    color: var(--text-main);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 5px 10px;
+    border-radius: 6px;
+    transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+}
+
+[data-theme="dark"] .details-scale-badge {
+    background-color: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.08);
+    color: #ffffff !important;
+}
+
+@media (min-width: 480px) {
+    .details-scale-badge {
+        font-size: 12px;
+    }
+}
+
+.details-stock-badge-indicator {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    padding: 5px 10px;
+    border-radius: 6px;
+    letter-spacing: 0.3px;
+}
+
+@media (min-width: 480px) {
+    .details-stock-badge-indicator {
+        font-size: 11px;
+    }
+}
+
+.stock-available-badge {
+    background-color: rgba(46, 189, 89, 0.08);
+    border: 1px solid rgba(46, 189, 89, 0.2);
+    color: #2ebd59;
+}
+
+.stock-out-badge {
+    background-color: rgba(229, 9, 20, 0.08);
+    border: 1px solid rgba(229, 9, 20, 0.15);
+    color: #ef4444;
+}
+
+.details-price-display {
+    color: var(--text-main);
+    font-family: 'Inter', sans-serif;
+    font-size: 24px;
+    font-weight: 800;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+    transition: border-color 0.3s ease;
+}
+
+[data-theme="dark"] .details-price-display {
+    border-bottom-color: rgba(255, 255, 255, 0.04);
+}
+
+@media (min-width: 768px) {
+    .details-price-display {
+        font-size: 26px;
+    }
+}
+
+/* Detail Features Description Narrative Body */
+.details-description-text {
+    margin-bottom: 30px;
+}
+
+.description-section-heading {
+    color: var(--text-muted);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    margin: 0 0 10px 0;
+}
+
+.description-paragraph-content {
+    margin: 0;
+    color: var(--text-muted);
+    opacity: 0.9;
+    font-size: 13.5px;
+    line-height: 1.6;
+}
+
+@media (min-width: 768px) {
+    .description-paragraph-content {
+        font-size: 14px;
+    }
+}
+
+/* Actions Functional Triggers Links Buttons Elements */
+.details-action-row {
+    width: 100%;
+}
+
+.btn-add-to-cart-large {
+    background-color: var(--brand-racing-yellow) !important;
+    color: var(--original-footer-bg) !important;
+    border: none !important;
+    width: 100% !important;
+    padding: 15px 0 !important;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 1px;
+    border-radius: 6px !important;
+    cursor: pointer !important;
+    box-shadow: 0 4px 14px rgba(255, 204, 0, 0.2) !important;
+    transition: background-color 0.2s ease, transform 0.1s ease !important;
+}
+
+@media (min-width: 480px) {
+    .btn-add-to-cart-large {
+        max-width: 320px;
+    }
+}
+
+.btn-add-to-cart-large:hover {
+    background-color: #ffffff !important;
+    box-shadow: 0 6px 20px rgba(255, 255, 255, 0.15) !important;
+}
+
+.btn-add-to-cart-large:active {
+    transform: scale(0.98);
+}
+
+.btn-add-disabled {
+    background-color: rgba(0, 0, 0, 0.05) !important;
+    border: 1px solid rgba(0, 0, 0, 0.06) !important;
+    color: var(--text-muted) !important;
+    opacity: 0.6;
+    box-shadow: none !important;
+    cursor: not-allowed !important;
+    pointer-events: none;
+}
+
+[data-theme="dark"] .btn-add-disabled {
+    background-color: rgba(255, 255, 255, 0.03) !important;
+    border-color: rgba(255, 255, 255, 0.02) !important;
+}
+
+/* ==========================================================================
+   Show's Garage - Fulfillment & Shop FAQ Content Subsystem Layout rules
+   ========================================================================== */
+
+.my-faq-container {
+    margin-top: 35px;
+    padding: 20px 15px;
+    background-color: var(--card-bg);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    border-radius: 12px;
+    clear: both;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.02);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+[data-theme="dark"] .my-faq-container {
+    border-color: rgba(255, 255, 255, 0.04);
+}
+
+@media (min-width: 480px) {
+    .my-faq-container {
+        padding: 25px;
+    }
+}
+
+@media (min-width: 768px) {
+    .my-faq-container {
+        margin-top: 50px;
+        padding: 35px;
+    }
+}
+
+.my-faq-header {
+    margin-bottom: 25px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    padding-bottom: 15px;
+}
+
+[data-theme="dark"] .my-faq-header {
+    border-bottom-color: rgba(255, 255, 255, 0.04);
+}
+
+.my-faq-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.25rem;
+    color: var(--text-main);
+    margin: 0;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+@media (min-width: 768px) {
+    .my-faq-title {
+        font-size: 1.4rem;
+    }
+}
+
+/* --------------------------------------------------------------------------
+   Shipping Badges Section
+   -------------------------------------------------------------------------- */
+.shipping-badges-row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+@media (min-width: 540px) {
+    .shipping-badges-row {
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 20px;
+    }
+}
+
+@media (min-width: 768px) {
+    .shipping-badges-row {
+        margin-bottom: 40px;
+    }
+}
+
+.badge-box-item {
+    background-color: var(--body-bg);
+    border: 1px solid rgba(0, 0, 0, 0.04);
+    border-radius: 12px;
+    padding: 20px 15px;
+    text-align: center;
+    transition: transform 0.25s ease, border-color 0.25s ease, background-color 0.3s ease;
+}
+
+[data-theme="dark"] .badge-box-item {
+    border-color: rgba(255, 255, 255, 0.03);
+}
+
+@media (min-width: 768px) {
+    .badge-box-item {
+        padding: 25px 20px;
+    }
+}
+
+.badge-box-item:hover {
+    transform: translateY(-4px);
+    border-color: #e50914;
+}
+
+.badge-box-item svg {
+    width: 28px;
+    height: 28px;
+    fill: #e50914;
+    margin-bottom: 12px;
+}
+
+@media (min-width: 768px) {
+    .badge-box-item svg {
+        width: 32px;
+        height: 32px;
+        margin-bottom: 15px;
+    }
+}
+
+.badge-box-item h4 {
+    color: var(--text-main);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1rem;
+    margin: 0 0 8px 0;
+    font-weight: 700;
+}
+
+@media (min-width: 768px) {
+    .badge-box-item h4 {
+        font-size: 1.1rem;
+        margin-bottom: 10px;
+    }
+}
+
+.badge-box-item p {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin: 0;
+    line-height: 1.5;
+}
+
+@media (min-width: 768px) {
+    .badge-box-item p {
+        font-size: 0.88rem;
+    }
+}
+
+/* --------------------------------------------------------------------------
+   Accordion Stack Module Section
+   -------------------------------------------------------------------------- */
+.faq-accordion-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+@media (min-width: 768px) {
+    .faq-accordion-stack {
+        gap: 15px;
+    }
+}
+
+.faq-accordion-item {
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: var(--card-bg);
+    transition: border-color 0.25s ease;
+}
+
+[data-theme="dark"] .faq-accordion-item {
+    border-color: rgba(255, 255, 255, 0.04);
+}
+
+.faq-accordion-item:hover {
+    border-color: rgba(0, 0, 0, 0.15);
+}
+
+[data-theme="dark"] .faq-accordion-item:hover {
+    border-color: rgba(255, 255, 255, 0.12);
+}
+
+.faq-trigger-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 16px;
+    background-color: var(--body-bg);
+    cursor: pointer;
+    user-select: none;
+    transition: background-color 0.25s ease;
+}
+
+@media (min-width: 480px) {
+    .faq-trigger-header {
+        padding: 16px 20px;
+    }
+}
+
+@media (min-width: 768px) {
+    .faq-trigger-header {
+        padding: 18px 24px;
+    }
+}
+
+.faq-trigger-header:hover {
+    background-color: rgba(0, 0, 0, 0.04);
+}
+
+[data-theme="dark"] .faq-trigger-header:hover {
+    background-color: rgba(255, 255, 255, 0.02);
+}
+
+.faq-title-text {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14.5px;
+    font-weight: 600;
+    color: var(--text-main);
+    line-height: 1.4;
+}
+
+@media (min-width: 480px) {
+    .faq-title-text {
+        gap: 12px;
+    }
+}
+
+@media (min-width: 768px) {
+    .faq-title-text {
+        gap: 14px;
+    }
+}
+
+.faq-title-text svg {
+    width: 16px;
+    height: 16px;
+    fill: var(--text-muted);
+    flex-shrink: 0;
+    transition: fill 0.2s ease;
+}
+
+@media (min-width: 768px) {
+    .faq-title-text svg {
+        width: 18px;
+        height: 18px;
+    }
+}
+
+.faq-trigger-header:hover .faq-title-text svg {
+    fill: #e50914;
+}
+
+.faq-arrow-icon {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    transition: transform 0.25s ease, color 0.25s ease;
+    margin-left: 12px;
+}
+
+@media (min-width: 768px) {
+    .faq-arrow-icon {
+        margin-left: 15px;
+    }
+}
+
+.faq-trigger-header:hover .faq-arrow-icon {
+    color: var(--text-main);
+}
+
+/* Interactive Active State Overrides */
+.faq-accordion-item.is-open {
+    border-color: var(--brand-racing-yellow);
+    box-shadow: 0 4px 12px rgba(255, 204, 0, 0.04);
+}
+
+    .faq-accordion-item.is-open .faq-arrow-icon {
+        transform: rotate(180deg);
+        color: var(--text-main);
+    }
+
+    .faq-accordion-item.is-open .faq-title-text svg {
+        fill: var(--brand-racing-yellow);
+    }
+
+.faq-content-panel {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.25s cubic-bezier(0, 1, 0, 1);
+    background-color: var(--card-bg);
+}
+
+.faq-inner-text {
+    padding: 15px 16px;
+    font-size: 13.5px;
+    color: var(--text-muted);
+    line-height: 1.6;
+    border-top: 1px solid rgba(0, 0, 0, 0.04);
+    text-align: left;
+}
+
+[data-theme="dark"] .faq-inner-text {
+    border-top-color: rgba(255, 255, 255, 0.03);
+}
+
+@media (min-width: 480px) {
+    .faq-inner-text {
+        padding: 16px 20px;
+    }
+}
+
+@media (min-width: 768px) {
+    .faq-inner-text {
+        padding: 20px 24px;
+    }
+}

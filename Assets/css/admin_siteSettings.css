@@ -1,0 +1,367 @@
+﻿/* ==========================================================================
+   Show's Garage - Dedicated Master System Settings Dashboard Layout Styles
+   ========================================================================== */
+
+.admin-theme-wrapper {
+    width: 100%;
+    min-height: 100vh;
+    background-color: #0d0d0d;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    color: #ffffff;
+    box-sizing: border-box;
+}
+
+.admin-content-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px 15px;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+/* Structural Layout Header Strip Elements */
+.admin-controls-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #1a1a1a;
+    padding-bottom: 15px;
+    margin-bottom: 30px;
+    gap: 15px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.admin-main-heading {
+    font-size: 22px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin: 0;
+}
+
+.admin-pill-badge {
+    color: #ff5722;
+    background-color: rgba(255, 87, 34, 0.08);
+    border: 1px solid #ff5722;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border-radius: 20px;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+}
+
+/* System Dual Columns Grid Structuring Framework */
+.settings-layout-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 25px;
+    align-items: start;
+    width: 100%;
+}
+
+@media (min-width: 992px) {
+    .settings-layout-grid {
+        grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
+    }
+}
+
+/* Form Matrix Component Input Controls Panels */
+.settings-card-panel {
+    background-color: #141414;
+    border: 1px solid #222222;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 25px;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+@media (min-width: 768px) {
+    .settings-card-panel {
+        padding: 25px;
+    }
+}
+
+.settings-card-panel.premium-border {
+    border-color: #2a2a2a;
+    background-color: #161616;
+}
+
+.settings-card-title {
+    font-size: 16px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin: 0 0 20px 0;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #222222;
+    color: #ffffff;
+    text-align: left;
+}
+
+    .settings-card-title.text-orange {
+        color: #ff5722;
+    }
+
+/* Grid Field Form Parameters Controls Alignments */
+.settings-form-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 18px;
+    width: 100%;
+}
+
+@media (min-width: 576px) {
+    .settings-form-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .full-width {
+        grid-column: span 2;
+    }
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.settings-label {
+    color: #777777;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    text-align: left;
+}
+
+    .settings-label.label-highlight {
+        color: #0076df;
+    }
+
+.settings-input {
+    background-color: #1c1c1c;
+    border: 1px solid #2d2d2d;
+    border-radius: 5px;
+    color: #ffffff;
+    padding: 11px 12px;
+    font-size: 14px;
+    outline: none;
+    width: 100%;
+    box-sizing: border-box;
+    transition: all 0.2s ease;
+}
+
+    .settings-input:focus {
+        border-color: #0076df;
+        background-color: #202020;
+    }
+
+    .settings-input.text-area {
+        resize: vertical;
+        font-family: inherit;
+    }
+
+    .settings-input.path-display {
+        color: #555555;
+        background-color: #111111;
+        font-family: monospace;
+        font-size: 12px;
+        cursor: not-allowed;
+    }
+
+    .settings-input.file-picker {
+        padding: 7px;
+        font-size: 12px;
+        background-color: #181818;
+        cursor: pointer;
+    }
+
+    /* Numeric, UPI Specific Layout Emphases */
+    .settings-input.numeric-input {
+        font-size: 16px;
+        font-weight: 700;
+        color: #2ebd59;
+        font-family: monospace;
+    }
+
+    .settings-input.upi-input {
+        font-weight: 600;
+        color: #0076df;
+        font-family: monospace;
+    }
+
+/* Interactive Previews Thumbnail Components Boxes */
+.current-qr-preview-box {
+    margin-top: 12px;
+    background-color: #0d0d0d;
+    padding: 12px;
+    border-radius: 6px;
+    border: 1px dashed #2d2d2d;
+    display: inline-block;
+    text-align: left;
+    box-sizing: border-box;
+}
+
+.qr-img-thumb {
+    max-width: 120px;
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+    background-color: #ffffff;
+    padding: 4px;
+    border: 1px solid #333333;
+    display: block;
+}
+
+/* Action Control Command Button Panels Block */
+@media (min-width: 992px) {
+    .settings-sidebar-column {
+        position: sticky;
+        top: 25px;
+    }
+}
+
+.action-submit-panel {
+    background-color: #141414;
+    border: 1px solid #222222;
+    border-radius: 8px;
+    padding: 15px;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.btn-settings-save {
+    background-color: #ff5722;
+    color: #ffffff;
+    width: 100%;
+    display: block;
+    border: none;
+    outline: none;
+    text-align: center;
+    font-weight: 700;
+    padding: 14px;
+    font-size: 14px;
+    border-radius: 5px;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    transition: all 0.2s ease;
+    box-sizing: border-box;
+}
+
+    .btn-settings-save:hover {
+        background-color: #f4511e;
+        box-shadow: 0 4px 14px rgba(255, 87, 34, 0.25);
+    }
+
+    .btn-settings-save:active {
+        transform: scale(0.98);
+    }
+
+/* System Alerts Notification Layout Components Banner */
+.admin-alert-banner {
+    display: block;
+    padding: 12px 15px;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 25px;
+    text-align: left;
+    border: 1px solid transparent;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+    .admin-alert-banner.alert-success {
+        background-color: rgba(46, 189, 89, 0.08);
+        border-color: #2ebd59;
+        color: #2ebd59;
+    }
+
+    .admin-alert-banner.alert-error {
+        background-color: rgba(255, 51, 51, 0.08);
+        border-color: #ff3333;
+        color: #ff6666;
+    }
+
+/* ==========================================================================
+   📱 ADAPTIVE MOBILE CRISIS OVERRIDES (max-width: 600px)
+   ========================================================================== */
+@media screen and (max-width: 600px) {
+    .admin-content-container {
+        padding: 12px 10px;
+    }
+
+    .admin-controls-bar {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+        margin-bottom: 20px;
+    }
+
+    .admin-pill-badge {
+        width: 100%;
+        text-align: center;
+    }
+
+    .settings-card-panel {
+        padding: 15px;
+    }
+
+    /* Force grids to act as full-width vertical stack blocks */
+    .settings-form-grid {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 15px !important;
+    }
+
+    .form-group.half-width,
+    .form-group.full-width {
+        width: 100% !important;
+        margin: 0 !important;
+    }
+
+    /* Set fields to 16px to prevent iOS Safari auto-zoom on field selections */
+    .settings-input {
+        font-size: 16px !important;
+        padding: 12px !important;
+    }
+
+        .settings-input.file-picker {
+            font-size: 13px !important;
+            padding: 10px 8px !important;
+        }
+
+        .settings-input.numeric-input {
+            font-size: 16px !important;
+        }
+
+    /* Full width optimization for the active preview system layout */
+    .current-qr-preview-box {
+        width: 100%;
+        display: block;
+        text-align: center;
+    }
+
+    .qr-img-thumb {
+        margin: 0 auto;
+        max-width: 140px;
+    }
+
+    .action-submit-panel {
+        padding: 12px;
+    }
+
+    .btn-settings-save {
+        padding: 15px 10px !important;
+        font-size: 15px !important;
+    }
+}
